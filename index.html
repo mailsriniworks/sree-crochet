@@ -3,264 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Professional US state and federal holiday calendar for 2026 with interactive state explorer and PTO optimizer" />
-  <title>PTO Optimizer | US Holidays 2026</title>
-  
-  <!-- Leaflet CSS for OpenStreetMap -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-  
-  <link rel="stylesheet" href="./styles.css" />
+  <meta name="description" content="Handmade crochet — clothing, home goods, and accessories. Beautifully crafted, sustainably made." />
+  <title>Handmade Crochet — Showcase</title>
+  <link rel="stylesheet" href="./styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body data-view="map">
-  <!-- Skip link for keyboard users -->
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <main class="app" id="main">
-    <!-- Top Navigation Bar -->
-    <nav class="top-nav">
-      <div class="nav-brand">
-        <span class="nav-title">PTO Optimizer</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>Handmade Crochet</h1>
+        <p class="tag">Clothing • Home Goods • Accessories</p>
       </div>
-      
-      <div class="nav-actions">
-        <div class="search-wrapper-compact">
-          <input 
-            id="quickSearch" 
-            class="search-compact" 
-            placeholder="Quick search..." 
-            aria-label="Quick search state" 
-            type="text"
-            list="stateDatalist"
-            autocomplete="off" />
-          <datalist id="stateDatalist">
-            <!-- Populated by JavaScript -->
-          </datalist>
-        </div>
-        
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
-          <span class="theme-icon">Theme</span>
-        </button>
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero-compact">
-      <div class="hero-content-compact">
-        <h1 class="hero-title-compact">
-          <span class="gradient-text">PTO Optimizer</span>
-        </h1>
-        <p class="hero-subtitle-compact">Maximize your vacation days • 50 states • Smart holiday planning for 2026</p>
-      </div>
-
-      <!-- View Switcher -->
-      <div class="view-switcher">
-        <button class="view-btn active" data-view="map" title="Map View">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/>
-            <path d="M8 2v16M16 6v16"/>
-          </svg>
-          <span>Map</span>
-        </button>
-        <button class="view-btn" data-view="grid" title="Grid View">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7"/>
-            <rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/>
-            <rect x="3" y="14" width="7" height="7"/>
-          </svg>
-          <span>Grid</span>
-        </button>
-        <button class="view-btn" data-view="table" title="Table View">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 3h18v18H3V3z"/>
-            <path d="M3 9h18M3 15h18M9 3v18"/>
-          </svg>
-          <span>Table</span>
-        </button>
-        <button class="view-btn" data-view="list" title="List View">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="8" y1="6" x2="21" y2="6"/>
-            <line x1="8" y1="12" x2="21" y2="12"/>
-            <line x1="8" y1="18" x2="21" y2="18"/>
-            <line x1="3" y1="6" x2="3.01" y2="6"/>
-            <line x1="3" y1="12" x2="3.01" y2="12"/>
-            <line x1="3" y1="18" x2="3.01" y2="18"/>
-          </svg>
-          <span>List</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Map View Container -->
-    <div class="view-container" id="mapView">
-      <div class="map-container">
-        <div class="map-sidebar">
-          <div class="sidebar-header">
-            <h2>Select a State</h2>
-            <p class="sidebar-subtitle">Click on the map or choose from the list</p>
-          </div>
-          
-          <div class="search-wrapper">
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.35-4.35"></path>
-            </svg>
-            <input 
-              id="stateSearch" 
-              class="search" 
-              placeholder="Search states..." 
-              aria-label="Search state" 
-              type="text"
-              list="stateDatalist2"
-              autocomplete="off" />
-            <datalist id="stateDatalist2">
-              <!-- Populated by JavaScript -->
-            </datalist>
-          </div>
-          
-          <div class="state-list" id="stateList">
-            <!-- Populated by JavaScript -->
-          </div>
-        </div>
-        
-        <div class="map-main">
-          <div class="map-svg-container" id="usMap">
-            <!-- US Map SVG will be inserted here -->
-          </div>
-          
-          <!-- State Detail Panel (slides in when state selected) -->
-          <div class="state-detail-panel" id="stateDetail">
-            <button class="panel-close" id="closePanel" aria-label="Close panel">×</button>
-            <div class="panel-content" id="panelContent">
-              <!-- Populated by JavaScript -->
-            </div>
-          </div>
-        </div>
+      <div class="controls">
+        <input id="search" class="search" type="search" placeholder="Search items, materials, or tags" aria-label="Search items">
+        <select id="categoryFilter" aria-label="Filter by category">
+          <option value="all">All Categories</option>
+          <option value="clothing">Clothing</option>
+          <option value="home">Home Goods</option>
+          <option value="accessories">Accessories</option>
+        </select>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
       </div>
     </div>
+  </header>
 
-    <!-- Grid View Container -->
-    <div class="view-container hidden" id="gridView">
-      <div class="filter-bar">
-        <div class="filter-chips">
-          <button class="chip chip-active" data-filter="all">All States</button>
-          <button class="chip" data-filter="unique">Unique Holidays</button>
-          <button class="chip" data-filter="federal">Federal Only</button>
-        </div>
-        
-        <div class="sort-controls">
-          <label for="sortSelect">Sort by:</label>
-          <select id="sortSelect" class="sort-select">
-            <option value="name">Name (A-Z)</option>
-            <option value="holidays">Most Holidays</option>
-            <option value="unique">Unique Holidays</option>
-          </select>
-        </div>
+  <main id="main" class="container main">
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Beautifully crafted crochet for everyday life</h2>
+        <p>Discover unique, hand-stitched pieces made with care — curated collections of clothing, cozy homewares, and wearable accessories.</p>
       </div>
-      
-      <div class="grid-container" id="gridContainer">
-        <!-- Populated by JavaScript -->
+      <div class="hero-actions">
+        <button id="viewAllBtn" class="btn-primary">View Collection</button>
       </div>
-    </div>
+    </section>
 
-    <!-- Table View Container -->
-    <div class="view-container hidden" id="tableView">
-      <div class="table-controls">
-        <h2>Holiday Comparison Table</h2>
-        <div class="table-actions">
-          <button class="btn-secondary" id="exportTable">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Export CSV
-          </button>
-          <button class="btn-secondary" id="expandAll">Expand All</button>
-        </div>
-      </div>
-      
-      <div class="table-wrapper">
-        <table class="data-table" id="holidayTable">
-          <thead>
-            <tr>
-              <th class="sortable" data-sort="state">State <span class="sort-arrow">↕</span></th>
-              <th class="sortable" data-sort="code">Code <span class="sort-arrow">↕</span></th>
-              <th class="sortable" data-sort="count">Holidays <span class="sort-arrow">↕</span></th>
-              <th>Unique Holidays</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <!-- Populated by JavaScript -->
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <section class="gallery" id="gallery" aria-live="polite">
+      <!-- Cards rendered here -->
+    </section>
 
-    <!-- List View Container -->
-    <div class="view-container hidden" id="listView">
-      <div class="list-header">
-        <h2>All States & Holidays</h2>
-        <div class="list-controls">
-          <button class="btn-secondary" id="collapseAllList">Collapse All</button>
-          <button class="btn-secondary" id="expandAllList">Expand All</button>
-        </div>
-      </div>
-      <div class="accordion" id="accordion">
-        <!-- Populated by JavaScript -->
-      </div>
-    </div>
-
-    <!-- Stats Footer -->
-    <div class="stats-footer">
-      <div class="stat-item-footer">
-        <div class="stat-value-footer" id="stateCount">51</div>
-        <div class="stat-label-footer">States & Territories</div>
-      </div>
-      <div class="stat-divider-footer"></div>
-      <div class="stat-item-footer">
-        <div class="stat-value-footer" id="holidayCount">—</div>
-        <div class="stat-label-footer">Total Holidays</div>
-      </div>
-      <div class="stat-divider-footer"></div>
-      <div class="stat-item-footer">
-        <div class="stat-value-footer" id="selectedState">—</div>
-        <div class="stat-label-footer">Selected</div>
-      </div>
-    </div>
-
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About</h3>
-          <p>Interactive holiday calendar featuring all 50 US states plus DC, with smart PTO optimization strategies.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Data</h3>
-          <p>All holiday data maintained in <code>data/states.json</code>. Contributions welcome on GitHub.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Views</h3>
-          <p>Switch between Map, Grid, Table, and List views to explore holidays your way.</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <small>© 2026 US Holiday Calendar • Made with ❤️ for better vacation planning • <a href="https://github.com/mailsriniworks/holidaylist" target="_blank">View on GitHub</a></small>
-      </div>
-    </footer>
+    <aside class="panel" id="detailPanel" aria-hidden="true">
+      <button class="panel-close" id="closePanel" aria-label="Close details">×</button>
+      <div id="panelContent"></div>
+    </aside>
   </main>
 
-  <!-- Leaflet JS for OpenStreetMap -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha384-H4PmUhnaaBEx/h5ODZriOn4ai2+gEuZ+J1uo7VJkfk2gfJDudO9x+3f2MqmqIy2P"
-    crossorigin=""></script>
-  
-  <script src="./app.js" defer></script>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Handmade Crochet</strong>
+        <p>Made with care • Sustainable materials • Custom orders welcome</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Contact</a>
+        <a href="#">Shop</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>

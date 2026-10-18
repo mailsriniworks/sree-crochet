@@ -1,0 +1,82 @@
+[
+  {
+    "id": "p-001",
+    "title": "Cozy Cable Knit Cardigan",
+    "category": "clothing",
+    "price": "$85",
+    "material": "100% Merino Wool",
+    "image": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "A relaxed-fit cardigan with classic cables and deep pockets — perfect for layering.",
+    "tags": ["cardigan","wool","winter"]
+  },
+  {
+    "id": "p-002",
+    "title": "Boho Granny Square Pillow",
+    "category": "home",
+    "price": "$45",
+    "material": "Cotton Blend",
+    "image": "https://images.unsplash.com/photo-1505691723518-36a8b04a0ea7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "Hand-stitched granny squares combined into a vibrant, textured pillow cover.",
+    "tags": ["pillow","home","decor"]
+  },
+  {
+    "id": "p-003",
+    "title": "Delicate Lace Beanie",
+    "category": "accessories",
+    "price": "$28",
+    "material": "Alpaca Blend",
+    "image": "https://images.unsplash.com/photo-1540960173-4ac9f0d2d6b1?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "Lightweight lace-stitch beanie with a softly slouchy silhouette.",
+    "tags": ["hat","beanie","alpaca"]
+  },
+  {
+    "id": "p-004",
+    "title": "Market Tote — Recycled Cotton",
+    "category": "accessories",
+    "price": "$34",
+    "material": "Recycled Cotton",
+    "image": "https://images.unsplash.com/photo-1505765055402-6d0b3b5b6b47?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "A sturdy, breathable crochet tote that holds everything for your daily market run.",
+    "tags": ["tote","bag","cotton"]
+  },
+  {
+    "id": "p-005",
+    "title": "Chunky Throw — Neutral",
+    "category": "home",
+    "price": "$120",
+    "material": "Wool Blend",
+    "image": "https://images.unsplash.com/photo-1503342452485-86f7d7e6f5b2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "Oversized chunky throw perfect for cozy evenings on the couch.",
+    "tags": ["throw","blanket","cozy"]
+  },
+  {
+    "id": "p-006",
+    "title": "Child's Dino Pullover",
+    "category": "clothing",
+    "price": "$52",
+    "material": "Soft Acrylic",
+    "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "Playful pullover with textured spikes — machine-washable and easy-care.",
+    "tags": ["kids","sweater","fun"]
+  },
+  {
+    "id": "p-007",
+    "title": "Minimalist Fingerless Gloves",
+    "category": "accessories",
+    "price": "$22",
+    "material": "Merino Blend",
+    "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "A sleek pair of fingerless gloves that keep wrists warm while leaving fingers free.",
+    "tags": ["gloves","winter","minimal"]
+  },
+  {
+    "id": "p-008",
+    "title": "Sunset Shawl — Gradient",
+    "category": "clothing",
+    "price": "$68",
+    "material": "Linen Blend",
+    "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder",
+    "description": "Lightweight shawl with a gentle gradient — perfect for cool evenings.",
+    "tags": ["shawl","summer","linen"]
+  }
+]
