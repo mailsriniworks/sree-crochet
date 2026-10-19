@@ -36,6 +36,10 @@ export function productCardHtml(product, index = 0) {
         <button class="heart-btn ${fav ? 'is-fav' : ''}" data-fav-id="${escapeHtml(product.id)}"
                 aria-pressed="${fav}" aria-label="Save ${escapeHtml(product.title)} to favorites">${HEART_SVG}</button>
         <span class="p-glyph">${iconFor(product.category)}</span>
+        <div class="p-quick">
+          <button class="round-btn round-dark round-btn--sm" data-open-id="${escapeHtml(product.id)}"
+                  aria-label="Quick view ${escapeHtml(product.title)}">↗</button>
+        </div>
       </div>
       <div class="p-body">
         <div class="p-row">

@@ -22,11 +22,13 @@ js/
   store.js                  # Observable state + getVisibleProducts() selector + toggleFavorite()
   data.js                   # loadProducts() — fetch ./data/products.json
   utils.js                  # Pure helpers: escapeHtml, formatPrice, debounce, qs, qsa, elFromHtml
+  scrollFx.js               # initScrollFx(dom) — IO reveals, condensing sticky header, back-to-top, hero parallax
   components/
     productCard.js          # productCardHtml(product, index) + CATEGORY_LABELS/ICONS, HEART_SVG, iconFor()
     gallery.js              # renderGallery(root) — grid, loading spinner, empty, and error states
     showcase.js             # renderShowcase(dom) + stepShowcase(dir) — bento deals carousel/hero/exclusive
-    detailPanel.js          # renderDetailPanel(panel, content) — drawer render/close + focus management
+    detailPanel.js          # renderDetailPanel(panel, content) — drawer render/close + related row + focus mgmt
+    toast.js                # initToast(el) + toast(msg, icon) — aria-live toast notifications
     themeToggle.js          # initTheme(button) — localStorage persistence, system-preference fallback
 data/
   products.json             # Product catalogue (18 sample products)
@@ -34,13 +36,15 @@ wrangler.jsonc              # Cloudflare Workers config (name: sree-crochet, ass
 ```
 
 ### Rendering Flow
-1. `main.js` builds the `dom` object (all element refs), calls `initTheme()`, `setupUI(dom)`, then `loadCatalogue()`.
+1. `main.js` builds the `dom` object (all element refs), calls `initTheme()`, `setupUI(dom)`, `initScrollFx(dom)`, then `loadCatalogue()`.
 2. `setupUI` registers one store subscriber that re-renders gallery + panel + showcase + chip/fav/count sync on every state change.
 3. One delegated `document` click handler routes: `[data-fav-id]` → toggleFavorite, `[data-open-id]` and `#openExclusive(Arrow)` → selectedId, `[data-product-id]` cards → selectedId.
 4. Gallery cards also open on Enter/Space when the card itself is focused.
 5. Drawer opens when `selectedId` matches a product; closes via ×, backdrop click, or Escape (sets `selectedId: null`).
 6. Bento showcase (`showcase.js`) keeps a module-local carousel index over `featured` products; prev/next buttons call `stepShowcase(±1)` then `renderShowcase(dom)`. The exclusive slot always previews the next featured piece.
 7. Load errors set `state.error`; gallery renders a retry button wired through `dom.retry`.
+8. Polish wiring in `ui.js`: pointer swipe on `.bento-deals` (dx>40, dy<60), 6s showcase auto-advance (skipped when reduced-motion, tab hidden, drawer open, or <12s since manual input), toasts on favorite/subscribe/reset, focus restore to `dom.lastFocus` when the drawer closes, per-category counts into `[data-count]` spans.
+9. `[data-product-id]` clicks open/switch the drawer from anywhere — gallery cards and the drawer's "You may also like" related row. `scrollFx.js` adds `.is-visible` to `.reveal` elements via IntersectionObserver and toggles `.topbar--compact` / `.to-top.show` on scroll (rAF-throttled).
 
 ### Data Format (`data/products.json`)
 Array of products: `id`, `title`, `category` (`clothing`|`home`|`accessories`), `price` (number, USD), optional `rating` (number, default 4.8), `material`, `timeHours`, optional `featured` (boolean), `description`, optional `care`, `tags[]`.

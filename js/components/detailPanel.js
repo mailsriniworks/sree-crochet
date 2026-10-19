@@ -50,6 +50,8 @@ export function renderDetailPanel(panel, content) {
         )}">Request this piece ↗</a>
         <span class="muted panel-note">Custom orders welcome — colors and sizes made to your taste.</span>
       </div>
+
+      ${relatedHtml(product)}
     </div>
   `;
 
@@ -59,4 +61,32 @@ export function renderDetailPanel(panel, content) {
 
   const closeBtn = panel.querySelector('.panel-close');
   closeBtn?.focus({ preventScroll: true });
+}
+
+/** "You may also like" — same category first, then featured, max 3. */
+function relatedHtml(current) {
+  const pool = state.products.filter((p) => p.id !== current.id);
+  const sameCat = pool.filter((p) => p.category === current.category);
+  const rest = pool.filter((p) => p.category !== current.category && p.featured);
+  const related = [...sameCat, ...rest, ...pool].slice(0, 3);
+  if (!related.length) return '';
+
+  return `
+    <div class="panel-related">
+      <h4>You may also like</h4>
+      <div class="related-row">
+        ${related
+          .map(
+            (r) => `
+          <button class="related-item" data-product-id="${escapeHtml(r.id)}"
+                  aria-label="View ${escapeHtml(r.title)}">
+            <span class="related-visual" aria-hidden="true">${iconFor(r.category)}</span>
+            <span class="related-name">${escapeHtml(r.title)}</span>
+            <span class="related-price">${formatPrice(r.price)}</span>
+          </button>`
+          )
+          .join('')}
+      </div>
+    </div>
+  `;
 }

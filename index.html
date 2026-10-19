@@ -14,8 +14,8 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============ Top pill bar ============ -->
-  <header class="topbar">
+  <!-- ============ Top pill bar (sticky, condenses on scroll) ============ -->
+  <header class="topbar" id="topbar">
     <div class="topbar-row container">
       <a class="brand-pill" href="#main">
         <span class="brand-logo" aria-hidden="true">❋</span>
@@ -56,10 +56,10 @@
       </button>
 
       <nav class="cat-pills" aria-label="Browse by category">
-        <button class="cat-pill" data-category-chip="all" aria-pressed="true">All</button>
-        <button class="cat-pill" data-category-chip="clothing" aria-pressed="false">Clothing</button>
-        <button class="cat-pill" data-category-chip="home" aria-pressed="false">Home Goods</button>
-        <button class="cat-pill" data-category-chip="accessories" aria-pressed="false">Accessories</button>
+        <button class="cat-pill" data-category-chip="all" aria-pressed="true">All<span class="pill-count" data-count="all"></span></button>
+        <button class="cat-pill" data-category-chip="clothing" aria-pressed="false">Clothing<span class="pill-count" data-count="clothing"></span></button>
+        <button class="cat-pill" data-category-chip="home" aria-pressed="false">Home Goods<span class="pill-count" data-count="home"></span></button>
+        <button class="cat-pill" data-category-chip="accessories" aria-pressed="false">Accessories<span class="pill-count" data-count="accessories"></span></button>
       </nav>
 
       <select id="sort" class="sort-pill" aria-label="Sort collection">
@@ -74,7 +74,7 @@
   <main id="main" class="container">
     <!-- ============ Bento showcase ============ -->
     <section class="bento" aria-label="Featured pieces">
-      <article class="bento-deals">
+      <article class="bento-deals reveal">
         <h2 class="bento-title">New Arrivals</h2>
         <div class="deal-slot" id="dealSlot"></div>
         <div class="slide-bar">
@@ -84,14 +84,14 @@
         </div>
       </article>
 
-      <article class="bento-hero">
+      <article class="bento-hero reveal">
         <h2 class="bento-title">Handmade With Heart</h2>
         <p class="bento-sub">Every loop counted by hand — natural &amp; recycled fibers</p>
         <div class="hero-visual" id="heroVisual" aria-hidden="true"></div>
         <div class="rating-pill" id="heroRating"><span class="star">★</span> 4.9</div>
       </article>
 
-      <article class="bento-exclusive">
+      <article class="bento-exclusive reveal">
         <span class="label-pill">Exclusive</span>
         <div class="exclusive-grid">
           <div class="exclusive-copy">
@@ -111,7 +111,7 @@
         </div>
       </article>
 
-      <aside class="bento-side">
+      <aside class="bento-side reveal">
         <section class="side-card">
           <span class="label-pill">Our Studio</span>
           <p class="side-copy"><strong>Our studio</strong> <span class="muted">designs cozy, sustainable crochet pieces</span> <strong>by hand.</strong></p>
@@ -137,20 +137,67 @@
       </aside>
     </section>
 
+    <!-- ============ Value ticker ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Handmade with heart</span><span class="tick-dot">❋</span>
+        <span>Natural &amp; recycled fibers</span><span class="tick-dot">❋</span>
+        <span>Made to order</span><span class="tick-dot">❋</span>
+        <span>Small batch</span><span class="tick-dot">❋</span>
+        <span>Ships plastic-free</span><span class="tick-dot">❋</span>
+        <span>Custom colors welcome</span><span class="tick-dot">❋</span>
+        <span>Handmade with heart</span><span class="tick-dot">❋</span>
+        <span>Natural &amp; recycled fibers</span><span class="tick-dot">❋</span>
+        <span>Made to order</span><span class="tick-dot">❋</span>
+        <span>Small batch</span><span class="tick-dot">❋</span>
+        <span>Ships plastic-free</span><span class="tick-dot">❋</span>
+        <span>Custom colors welcome</span><span class="tick-dot">❋</span>
+      </div>
+    </div>
+
     <!-- ============ Full collection ============ -->
     <section class="collection" aria-label="Full collection">
-      <div class="collection-head">
+      <div class="collection-head reveal">
         <h2>The Collection <span class="count" id="resultCount"></span></h2>
       </div>
       <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
     </section>
+
+    <!-- ============ Values ============ -->
+    <section class="values" aria-label="Why handmade">
+      <div class="value reveal">
+        <span class="value-icon" aria-hidden="true">🌿</span>
+        <h3>Natural fibers</h3>
+        <p>Merino, alpaca, linen &amp; recycled cotton — chosen to last for years, not seasons.</p>
+      </div>
+      <div class="value reveal">
+        <span class="value-icon" aria-hidden="true">✋</span>
+        <h3>Made to order</h3>
+        <p>Every piece begins when you order it. Zero waste, full intention, one hook at a time.</p>
+      </div>
+      <div class="value reveal">
+        <span class="value-icon" aria-hidden="true">📦</span>
+        <h3>Ships with care</h3>
+        <p>Plastic-free packaging and a handwritten note tucked into every single box.</p>
+      </div>
+    </section>
+
+    <!-- ============ Quote ============ -->
+    <section class="quote-band reveal">
+      <blockquote>“The throw is the coziest thing we own — you can feel the hours in every stitch.”</blockquote>
+      <cite>— Priya M., verified customer</cite>
+    </section>
   </main>
+
+  <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
 
   <div class="panel-backdrop" id="panelBackdrop" aria-hidden="true"></div>
   <aside class="panel" id="detailPanel" role="dialog" aria-modal="true" aria-label="Product details" aria-hidden="true">
     <button class="panel-close" id="closePanel" aria-label="Close details">×</button>
     <div id="panelContent"></div>
   </aside>
+
+  <div id="toastRoot" class="toast-root" role="status" aria-live="polite"></div>
 
   <footer class="site-footer">
     <div class="container footer-inner">

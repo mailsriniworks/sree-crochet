@@ -25,11 +25,12 @@ export function renderGallery(root) {
 
   const products = getVisibleProducts();
   if (products.length === 0) {
+    const favEmpty = state.favOnly && state.favorites.length === 0;
     root.innerHTML = `
       <div class="gallery-status">
-        <p class="empty-emoji" aria-hidden="true">🧵</p>
-        <p>No pieces match your search.</p>
-        <p class="muted">Try a different keyword or category.</p>
+        <p class="empty-emoji" aria-hidden="true">${favEmpty ? '🤍' : '🧵'}</p>
+        <p>${favEmpty ? 'No saved pieces yet.' : 'No pieces match your search.'}</p>
+        <p class="muted">${favEmpty ? 'Tap the ♥ on anything you love and it will wait for you here.' : 'Try a different keyword or category.'}</p>
       </div>`;
     return;
   }

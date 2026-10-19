@@ -2,9 +2,11 @@
 import { loadProducts } from './data.js';
 import { setState, subscribe } from './store.js';
 import { setupUI } from './ui.js';
+import { initScrollFx } from './scrollFx.js';
 import { initTheme } from './components/themeToggle.js';
 
 const dom = {
+  topbar: document.getElementById('topbar'),
   search: document.getElementById('search'),
   searchBtn: document.getElementById('searchBtn'),
   sort: document.getElementById('sort'),
@@ -31,6 +33,8 @@ const dom = {
   openExclusiveArrow: document.getElementById('openExclusiveArrow'),
   newsletter: document.getElementById('newsletter'),
   newsMsg: document.getElementById('newsMsg'),
+  toTop: document.getElementById('toTop'),
+  toastRoot: document.getElementById('toastRoot'),
   subscribe,
 };
 
@@ -49,6 +53,7 @@ async function loadCatalogue() {
 async function init() {
   initTheme(dom.themeToggle);
   setupUI(dom);
+  initScrollFx(dom);
   dom.retry = loadCatalogue;
   await loadCatalogue();
 }
