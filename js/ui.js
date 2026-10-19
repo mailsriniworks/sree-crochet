@@ -1,75 +1,88 @@
-// js/ui.js — UI glue: events and interactions
-import { Store } from './store.js';
-import { renderGallery, renderDetail, closeDetail } from './render.js';
+// js/ui.js — wires DOM events to the store (search, filters, sort, drawer).
+import { state, setState } from './store.js';
+import { renderGallery } from './components/gallery.js';
+import { renderDetailPanel } from './components/detailPanel.js';
+import { debounce, qsa } from './utils.js';
 
-export function setupUI() {
-  const search = document.getElementById('search');
-  const category = document.getElementById('categoryFilter');
-  const gallery = document.getElementById('gallery');
-  const panel = document.getElementById('detailPanel');
-  const closePanel = document.getElementById('closePanel');
-  const themeToggle = document.getElementById('themeToggle');
-  const viewAllBtn = document.getElementById('viewAllBtn');
+export function setupUI(dom) {
+  // ---- Gallery + panel re-render on any state change ----
+  const rerender = () => {
+    renderGallery(dom.gallery);
+    renderDetailPanel(dom.panel, dom.panelContent);
+    syncCategoryChips();
+    syncResultCount();
+  };
+  dom.subscribe(rerender);
 
-  function refresh() {
-    renderGallery(gallery);
+  // ---- Search (debounced) ----
+  const onSearch = debounce((value) => setState({ search: value }), 180);
+  dom.search.addEventListener('input', (e) => onSearch(e.target.value));
+
+  // ---- Category filter (select + chips) ----
+  dom.categoryFilter.addEventListener('change', (e) => {
+    setState({ category: e.target.value });
+  });
+
+  qsa('[data-category-chip]').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      setState({ category: chip.dataset.categoryChip });
+      dom.gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  function syncCategoryChips() {
+    qsa('[data-category-chip]').forEach((chip) => {
+      const active = chip.dataset.categoryChip === state.category;
+      chip.classList.toggle('chip--active', active);
+      chip.setAttribute('aria-pressed', String(active));
+    });
   }
 
-  search.addEventListener('input', (e)=>{
-    Store.setQuery(e.target.value);
-    refresh();
-  });
+  // ---- Sort ----
+  dom.sort.addEventListener('change', (e) => setState({ sort: e.target.value }));
 
-  category.addEventListener('change', (e)=>{
-    Store.setCategory(e.target.value);
-    refresh();
-  });
+  // ---- Result count ----
+  function syncResultCount() {
+    if (!dom.resultCount) return;
+    const visible = qsa('.card', dom.gallery).length;
+    dom.resultCount.textContent = state.loading
+      ? 'Loading…'
+      : `${visible} ${visible === 1 ? 'piece' : 'pieces'}`;
+  }
 
-  gallery.addEventListener('click', (e)=>{
-    const btn = e.target.closest('button[data-action]');
-    if (!btn) return;
-    const id = btn.dataset.id;
-    const product = Store.products.find(p => p.id === id);
-    if (btn.dataset.action === 'view'){
-      Store.setSelected(product);
-      renderDetail(panel, product);
-      panel.setAttribute('aria-hidden','false');
-      panel.querySelector('.panel-close')?.focus();
-    }
-    if (btn.dataset.action === 'fav'){
-      // simple feedback
-      btn.textContent = '✓';
-      setTimeout(()=>btn.textContent = '❤', 900);
+  // ---- Product selection (click / keyboard on cards) ----
+  dom.gallery.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-product-id]');
+    if (card) setState({ selectedId: card.dataset.productId });
+  });
+  dom.gallery.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('[data-product-id]');
+    if (card) {
+      e.preventDefault();
+      setState({ selectedId: card.dataset.productId });
     }
   });
 
-  closePanel.addEventListener('click', ()=>{
-    Store.setSelected(null);
-    closeDetail(panel);
+  // ---- Panel close (button, backdrop, Escape) ----
+  const closePanel = () => setState({ selectedId: null });
+  dom.closePanel.addEventListener('click', closePanel);
+  dom.panelBackdrop?.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && state.selectedId) closePanel();
   });
 
-  themeToggle.addEventListener('click', ()=>{
-    Store.toggleTheme();
-    applyTheme(Store.theme);
+  // ---- Retry after load error ----
+  dom.gallery.addEventListener('click', (e) => {
+    if (e.target.id === 'retryBtn' && typeof dom.retry === 'function') dom.retry();
   });
 
-  viewAllBtn.addEventListener('click', ()=>{
-    document.getElementById('search').focus();
+  // ---- Hero CTA ----
+  dom.viewAllBtn?.addEventListener('click', () => {
+    setState({ category: 'all', search: '' });
+    dom.search.value = '';
+    dom.gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // keyboard accessibility: close detail with Escape
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape' && panel.getAttribute('aria-hidden') === 'false'){
-      Store.setSelected(null);
-      closeDetail(panel);
-    }
-  });
-
-  // apply initial
-  applyTheme(Store.theme);
-}
-
-function applyTheme(theme){
-  if (theme === 'light') document.documentElement.classList.add('light-theme');
-  else document.documentElement.classList.remove('light-theme');
+  rerender();
 }

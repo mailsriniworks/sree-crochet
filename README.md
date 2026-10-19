@@ -1,19 +1,103 @@
-# Handmade Crochet — Showcase
+# ❋ Handmade Crochet — Showcase
 
-This repo has been converted from a US-state holiday planner into a lightweight static showcase for handmade crochet products.
+A lightweight, dependency-free static showcase for handmade crochet products, spanning **clothing, home goods, and accessories**.
 
-What I changed
-- Rewrote the UI into a modular vanilla JavaScript app (ES modules) under `js/`.
-- Replaced the data model with curated sample products in `data/products.json`.
-- Added a premium responsive CSS theme in `styles.css` with improved accessibility and keyboard controls.
-- Simplified interactions: search, category filter, product detail panel, theme toggle.
+Every piece in the collection tells the same story: natural fibers, counted loops, hours of human hands. The app is a single-page ES-module build with no framework, no bundler, and no build step — open it in a browser and it works.
 
-How to run
-1. Clone the repo
-2. Open `index.html` in a modern browser (no build step required) — the app uses ES modules and fetch for static JSON.
+## Features
 
-Notes & suggestions
-- Images in `data/products.json` use Unsplash placeholders. Replace with real images for production.
-- Consider adding pagination, a shopping/cart flow, or a CMS for dynamic content.
-- If you want, I can convert this to React or add unit tests and CI for deployment.
+- **Curated catalogue** — 18 sample products across three categories, loaded from `data/products.json`
+- **Search** — debounced, matches titles, materials, descriptions, and tags
+- **Category filter** — chips + dropdown, kept in sync
+- **Sorting** — featured first, price (both directions), name A–Z
+- **Detail drawer** — slide-in panel with materials, handmade-hours, care instructions, tags, and a "request this piece" mailto action
+- **Dual theme** — warm light / dark modes with `localStorage` persistence and system-preference detection
+- **Accessibility** — skip link, focusable cards, keyboard open/close (Enter/Space/Escape), ARIA dialog semantics, reduced-motion support
+- **Responsive** — fluid grid from phone to desktop
 
+## Project structure
+
+```
+index.html              # Single HTML entry point
+styles.css              # Full design system: tokens, layout, components, themes
+js/
+  main.js               # Bootstrap: DOM refs, theme init, catalogue load
+  ui.js                 # Event wiring: search, filter, sort, drawer, CTA
+  store.js              # Observable state container + derived selectors
+  data.js               # Catalogue fetch layer
+  utils.js              # Pure helpers: escapeHtml, formatPrice, debounce, qs/qsa
+  components/
+    productCard.js      # Card markup
+    gallery.js          # Grid rendering (incl. loading / empty / error states)
+    detailPanel.js      # Slide-in drawer rendering + focus management
+    themeToggle.js      # Light/dark toggle with persistence
+data/
+  products.json         # Product catalogue (edit this to change the shop)
+wrangler.jsonc          # Cloudflare Workers static-assets config
+```
+
+## Architecture
+
+The app uses a **tiny observable store** pattern:
+
+1. `store.js` holds one `state` object (products, search, category, sort, selection, theme, loading/error).
+2. UI events call `setState(patch)` — never mutate DOM directly.
+3. Subscribers re-render the gallery and drawer from state; rendering is a pure function of state.
+4. Components under `js/components/` only produce markup from data — no side effects.
+
+This keeps every module small, testable, and independent. Adding a feature = adding state, an event binding, and markup.
+
+## Data format
+
+Each product in `data/products.json`:
+
+```json
+{
+  "id": "crochet-beanie-12",
+  "title": "Alpine Slouch Beanie",
+  "category": "accessories",
+  "price": 45,
+  "material": "Alpaca blend",
+  "timeHours": 8,
+  "featured": true,
+  "description": "…",
+  "care": "Hand wash cold, dry flat; detach pom",
+  "tags": ["beanie", "hat", "alpaca", "winter"]
+}
+```
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | string | Unique, kebab-case |
+| `category` | string | `clothing` \| `home` \| `accessories` |
+| `price` | number | USD, formatted by `formatPrice()` |
+| `timeHours` | number | Shown as "Handmade in N hours" |
+| `featured` | boolean | Optional — surfaces badge + default sort priority |
+| `care` | string | Optional — care instructions |
+
+## Run locally
+
+Because the app fetches JSON, it needs an HTTP server (browsers block `fetch` on `file://`):
+
+```bash
+# any static server works
+python3 -m http.server 8080
+# then open http://localhost:8080
+```
+
+## Deploy (Cloudflare Workers)
+
+```bash
+npx wrangler dev      # local preview
+npx wrangler deploy   # production
+```
+
+`wrangler.jsonc` serves the repo root as static assets — no server-side logic.
+
+## Roadmap ideas
+
+- Replace category glyphs with real product photography
+- Pagination or "load more" as the catalogue grows
+- Favorites (localStorage) and a request/quote flow
+- CMS-backed content (Decap, Sanity) for non-technical updates
+- Unit tests for `store.js` selectors + CI deploy pipeline

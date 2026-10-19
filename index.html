@@ -1,71 +1,92 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Handmade crochet — clothing, home goods, and accessories. Beautifully crafted, sustainably made." />
-  <title>Handmade Crochet — Showcase</title>
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Handmade crochet — clothing, home goods, and accessories. Every piece hand-stitched with natural fibers and made to order." />
+  <meta name="theme-color" content="#faf6f0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#191410" media="(prefers-color-scheme: dark)" />
+  <title>Handmade Crochet — Clothing, Home Goods &amp; Accessories</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <h1>Handmade Crochet</h1>
-        <p class="tag">Clothing • Home Goods • Accessories</p>
+        <h1><span class="brand-mark">❋</span> Handmade Crochet</h1>
+        <p class="tag">Clothing · Home Goods · Accessories</p>
       </div>
       <div class="controls">
-        <input id="search" class="search" type="search" placeholder="Search items, materials, or tags" aria-label="Search items">
-        <select id="categoryFilter" aria-label="Filter by category">
+        <input id="search" class="search" type="search" placeholder="Search pieces, materials, tags…" aria-label="Search the collection" />
+        <select id="categoryFilter" class="control" aria-label="Filter by category">
           <option value="all">All Categories</option>
           <option value="clothing">Clothing</option>
           <option value="home">Home Goods</option>
           <option value="accessories">Accessories</option>
+        </select>
+        <select id="sort" class="control" aria-label="Sort collection">
+          <option value="featured">Featured first</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name">Name A–Z</option>
         </select>
         <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
       </div>
     </div>
   </header>
 
-  <main id="main" class="container main">
-    <section class="hero">
-      <div class="hero-text">
-        <h2>Beautifully crafted crochet for everyday life</h2>
-        <p>Discover unique, hand-stitched pieces made with care — curated collections of clothing, cozy homewares, and wearable accessories.</p>
-      </div>
+  <main id="main">
+    <section class="hero container">
+      <span class="hero-eyebrow">Slow-made · Small batch · One hook at a time</span>
+      <h2>Handmade crochet for <em>every corner</em> of your life</h2>
+      <p class="lede">A curated collection spanning clothing, home goods, and accessories — each piece hand-stitched from natural fibers, with every loop counted by a person, not a machine.</p>
       <div class="hero-actions">
-        <button id="viewAllBtn" class="btn-primary">View Collection</button>
+        <button id="viewAllBtn" class="btn btn-primary">Explore the Collection</button>
+        <a class="btn btn-ghost" href="#gallery">Jump to pieces</a>
       </div>
+      <nav class="chip-row" aria-label="Browse by category">
+        <button class="chip" data-category-chip="all" aria-pressed="true">All</button>
+        <button class="chip" data-category-chip="clothing" aria-pressed="false">🧥 Clothing</button>
+        <button class="chip" data-category-chip="home" aria-pressed="false">🏡 Home Goods</button>
+        <button class="chip" data-category-chip="accessories" aria-pressed="false">👜 Accessories</button>
+      </nav>
     </section>
 
-    <section class="gallery" id="gallery" aria-live="polite">
-      <!-- Cards rendered here -->
+    <section class="container">
+      <div class="toolbar" id="gallery">
+        <h2>The Collection <span class="count" id="resultCount"></span></h2>
+      </div>
+      <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
     </section>
-
-    <aside class="panel" id="detailPanel" aria-hidden="true">
-      <button class="panel-close" id="closePanel" aria-label="Close details">×</button>
-      <div id="panelContent"></div>
-    </aside>
   </main>
+
+  <div class="panel-backdrop" id="panelBackdrop" aria-hidden="true"></div>
+  <aside class="panel" id="detailPanel" role="dialog" aria-modal="true" aria-label="Product details" aria-hidden="true">
+    <button class="panel-close" id="closePanel" aria-label="Close details">×</button>
+    <div id="panelContent"></div>
+  </aside>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <strong>Handmade Crochet</strong>
-        <p>Made with care • Sustainable materials • Custom orders welcome</p>
+        <strong>❋ Handmade Crochet</strong>
+        <p>Made with care · Natural &amp; recycled fibers · Custom orders welcome</p>
       </div>
       <div class="footer-links">
-        <a href="#">Contact</a>
-        <a href="#">Shop</a>
-        <a href="#">GitHub</a>
+        <a href="mailto:hello@example.com">Contact</a>
+        <a href="#gallery">Shop</a>
+        <a href="https://github.com/mailsriniworks/sree-crochet">GitHub</a>
       </div>
     </div>
   </footer>
 
-  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>
