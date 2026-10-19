@@ -1,22 +1,18 @@
-// js/components/themeToggle.js — light/dark theme with localStorage persistence.
+// js/components/themeToggle.js — day/evening theme with localStorage persistence.
 import { state, setState } from './store.js';
 
 const STORAGE_KEY = '***';
 
-/** Apply the current theme to <html>, the nav icon, and its label. */
 function applyTheme(button) {
   document.documentElement.dataset.theme = state.theme;
-  const icon = button.querySelector('.nav-ico');
-  const label = document.getElementById('themeLabel');
-  if (icon) icon.textContent = state.theme === 'dark' ? '☀️' : '🌙';
-  if (label) label.textContent = state.theme === 'dark' ? 'Day mode' : 'Night mode';
+  button.textContent = state.theme === 'dark' ? '☀️' : '🌙';
   button.setAttribute(
     'aria-label',
-    state.theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+    state.theme === 'dark' ? 'Switch to day theme' : 'Switch to evening theme'
   );
 }
 
-/** Initialize the theme: stored preference → system preference → light. */
+/** Initialize the theme: stored preference → system preference → day. */
 export function initTheme(button) {
   const stored = localStorage.getItem(STORAGE_KEY);
   const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;

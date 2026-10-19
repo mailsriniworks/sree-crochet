@@ -18,7 +18,7 @@ export function renderGallery(root) {
     root.innerHTML = `
       <div class="gallery-status gallery-status--error" role="alert">
         <p>${escapeHtml(state.error)}</p>
-        <button class="btn-primary" id="retryBtn">Try again</button>
+        <button class="btn btn-solid" id="retryBtn">Try again</button>
       </div>`;
     return;
   }

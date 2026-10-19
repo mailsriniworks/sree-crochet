@@ -1,4 +1,5 @@
-// js/components/detailPanel.js — slide-in drawer showing a single product.
+// js/components/detailPanel.js — product drawer: full craft specs,
+// quantity stepper, add-to-basket / buy-now, related pieces.
 import { state } from '../store.js';
 import { escapeHtml, formatPrice, artStyle } from '../utils.js';
 import { CATEGORY_LABELS, iconFor } from './productCard.js';
@@ -8,10 +9,9 @@ export function renderDetailPanel(panel, content) {
   const product = state.products.find((p) => p.id === state.selectedId);
 
   if (!product) {
-    panel.classList.remove('panel--open');
+    panel.classList.remove('drawer--open');
     panel.setAttribute('aria-hidden', 'true');
     content.innerHTML = '';
-    document.body.classList.remove('panel-open');
     return;
   }
 
@@ -22,45 +22,46 @@ export function renderDetailPanel(panel, content) {
       <span class="panel-glyph">${iconFor(product.category)}</span>
     </div>
     <div class="panel-body">
-      <span class="panel-cat">${escapeHtml(label)}</span>
+      <span class="panel-cat">${escapeHtml(label)} · made to order</span>
       <h2 class="panel-title">${escapeHtml(product.title)}</h2>
       <div class="panel-price-row">
         <span class="panel-price">${formatPrice(product.price)}</span>
-        <span class="panel-rating"><span class="star">★</span> ${product.rating ?? '4.8'}</span>
+        <span class="panel-rating"><span class="star">★</span> ${product.rating ?? '4.8'} · ${product.timeHours}h by hand</span>
       </div>
       <p class="panel-desc">${escapeHtml(product.description)}</p>
 
       <dl class="panel-specs">
-        <div><dt>Material</dt><dd>${escapeHtml(product.material)}</dd></div>
-        <div><dt>Handmade in</dt><dd>${product.timeHours} hours</dd></div>
+        <div><dt>Stitch pattern</dt><dd>${escapeHtml(product.stitch ?? 'Hand crochet')}</dd></div>
+        <div><dt>Hook size</dt><dd>${escapeHtml(product.hook ?? '—')}</dd></div>
+        <div><dt>Fiber</dt><dd>${escapeHtml(product.material)}</dd></div>
         <div><dt>Care</dt><dd>${escapeHtml(product.care ?? 'See label')}</dd></div>
       </dl>
 
       <div class="panel-tags" aria-label="Tags">
         ${(product.tags ?? [])
-          .map((t) => `<span class="label-pill">#${escapeHtml(t)}</span>`)
+          .map((t) => `<span class="tag-pill">#${escapeHtml(t)}</span>`)
           .join('')}
       </div>
 
-      <div class="panel-actions">
-        <a class="btn-primary" href="mailto:?subject=${encodeURIComponent(
-          `Custom order: ${product.title}`
-        )}&body=${encodeURIComponent(
-          `Hi! I'd love to order "${product.title}" from the Sree Crochet collection.`
-        )}">Request this piece ↗</a>
-        <span class="muted panel-note">Custom orders welcome — colors and sizes made to your taste.</span>
+      <div class="buy-row">
+        <div class="qty-stepper" role="group" aria-label="Quantity">
+          <button data-qty-delta="-1" aria-label="Decrease quantity">−</button>
+          <output id="detailQtyOut">1</output>
+          <button data-qty-delta="1" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn btn-solid" id="addToCartBtn">Add to basket</button>
       </div>
+      <button class="btn btn-line btn-block" id="buyNowBtn">Buy it now →</button>
+      <p class="muted panel-note">Ships in ~2 weeks · free over $75 · repairs for life · custom colors at checkout</p>
 
       ${relatedHtml(product)}
     </div>
   `;
 
-  panel.classList.add('panel--open');
+  panel.classList.add('drawer--open');
   panel.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('panel-open');
 
-  const closeBtn = panel.querySelector('.panel-close');
-  closeBtn?.focus({ preventScroll: true });
+  panel.querySelector('.drawer-close')?.focus({ preventScroll: true });
 }
 
 /** "You may also like" — same category first, then featured, max 3. */

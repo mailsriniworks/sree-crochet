@@ -7,34 +7,31 @@ import { initTheme } from './components/themeToggle.js';
 
 const dom = {
   search: document.getElementById('search'),
-  searchBtn: document.getElementById('searchBtn'),
   sort: document.getElementById('sort'),
+  savedChip: document.getElementById('savedChip'),
   gallery: document.getElementById('galleryGrid'),
   resultCount: document.getElementById('resultCount'),
-  pageTitle: document.getElementById('pageTitle'),
-  bento: document.getElementById('bento'),
-  railPlayer: document.getElementById('railPlayer'),
+  collectionTitle: document.getElementById('collectionTitle'),
+  heroStats: document.getElementById('heroStats'),
+  statPieces: document.getElementById('statPieces'),
+  statHours: document.getElementById('statHours'),
+  cartBtn: document.getElementById('cartBtn'),
+  cartCount: document.getElementById('cartCount'),
+  cartPanel: document.getElementById('cartPanel'),
+  cartContent: document.getElementById('cartContent'),
+  cartCountLabel: document.getElementById('cartCountLabel'),
+  closeCart: document.getElementById('closeCart'),
   panel: document.getElementById('detailPanel'),
   panelContent: document.getElementById('panelContent'),
-  panelBackdrop: document.getElementById('panelBackdrop'),
   closePanel: document.getElementById('closePanel'),
+  backdrop: document.getElementById('drawerBackdrop'),
   themeToggle: document.getElementById('themeToggle'),
-  favPill: document.getElementById('favPill'),
-  favCount: document.getElementById('favCount'),
-  filterBtn: document.getElementById('filterBtn'),
-  askForm: document.getElementById('askForm'),
-  askInput: document.getElementById('askInput'),
-  greetTime: document.getElementById('greetTime'),
+  newsletter: document.getElementById('newsletter'),
   toTop: document.getElementById('toTop'),
   toastRoot: document.getElementById('toastRoot'),
+  detailQtyOut: () => document.getElementById('detailQtyOut'),
   subscribe,
 };
-
-function greet() {
-  const h = new Date().getHours();
-  const part = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
-  if (dom.greetTime) dom.greetTime.textContent = part;
-}
 
 async function loadCatalogue() {
   setState({ loading: true, error: null });
@@ -49,7 +46,6 @@ async function loadCatalogue() {
 }
 
 async function init() {
-  greet();
   initTheme(dom.themeToggle);
   setupUI(dom);
   initScrollFx(dom);

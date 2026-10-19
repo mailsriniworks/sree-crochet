@@ -1,27 +1,35 @@
-// js/store.js — tiny observable state container.
+// js/store.js — tiny observable state container with cart + wishlist.
 // Single source of truth; UI subscribes and re-renders on change.
 
-const FAV_KEY = 'sree-c…ites';
+const FAV_KEY = '***';
+const CART_KEY = '***';
 const listeners = new Set();
 
-function readFavorites() {
+function readJson(key, fallback) {
   try {
-    const raw = localStorage.getItem(FAV_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
+    const parsed = JSON.parse(localStorage.getItem(key) ?? 'null');
+    return parsed ?? fallback;
   } catch {
-    return [];
+    return fallback;
   }
 }
 
+function persist(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch { /* private mode: keep in-memory */ }
+}
+
 export const state = {
-  products: [],        // loaded catalogue
-  search: '',          // current search query
-  category: 'all',     // 'all' | 'clothing' | 'home' | 'accessories'
-  sort: 'featured',    // 'featured' | 'price-asc' | 'price-desc' | 'name'
-  selectedId: null,    // product id shown in the detail drawer
-  favorites: readFavorites(), // saved product ids
-  favOnly: false,      // show saved pieces only
+  products: [],               // loaded catalogue
+  search: '',
+  category: 'all',            // 'all' | 'clothing' | 'home' | 'accessories'
+  sort: 'featured',
+  selectedId: null,           // product shown in the detail drawer
+  cart: readJson(CART_KEY, []), // [{ id, qty }]
+  cartOpen: false,
+  favorites: readJson(FAV_KEY, []),
+  favOnly: false,
   theme: 'light',
   loading: true,
   error: null,
@@ -39,17 +47,55 @@ export function setState(patch) {
   listeners.forEach((fn) => fn(state));
 }
 
-/** Toggle a product in/out of favorites (persisted). */
+/* ---------------- wishlist ---------------- */
+
 export function toggleFavorite(id) {
   const favs = new Set(state.favorites);
   if (favs.has(id)) favs.delete(id);
   else favs.add(id);
   const favorites = [...favs];
-  try {
-    localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
-  } catch { /* private mode: keep in-memory only */ }
+  persist(FAV_KEY, favorites);
   setState({ favorites });
 }
+
+/* ---------------- cart ---------------- */
+
+export function addToCart(id, qty = 1) {
+  const cart = state.cart.map((line) => ({ ...line }));
+  const line = cart.find((l) => l.id === id);
+  if (line) line.qty += qty;
+  else cart.push({ id, qty });
+  persist(CART_KEY, cart);
+  setState({ cart });
+}
+
+export function setCartQty(id, qty) {
+  const cart = qty <= 0
+    ? state.cart.filter((l) => l.id !== id)
+    : state.cart.map((l) => (l.id === id ? { ...l, qty } : l));
+  persist(CART_KEY, cart);
+  setState({ cart });
+}
+
+export function clearCart() {
+  persist(CART_KEY, []);
+  setState({ cart: [] });
+}
+
+/** Total item count in the cart. */
+export function cartCount() {
+  return state.cart.reduce((n, l) => n + l.qty, 0);
+}
+
+/** Subtotal in USD cents-free numbers, resolved against the catalogue. */
+export function cartSubtotal() {
+  return state.cart.reduce((sum, l) => {
+    const p = state.products.find((x) => x.id === l.id);
+    return sum + (p ? p.price * l.qty : 0);
+  }, 0);
+}
+
+/* ---------------- selectors ---------------- */
 
 /** Derived, filtered + sorted product list for the gallery. */
 export function getVisibleProducts() {
@@ -61,7 +107,7 @@ export function getVisibleProducts() {
     if (favOnly && !favSet.has(p.id)) return false;
     if (category !== 'all' && p.category !== category) return false;
     if (!q) return true;
-    const haystack = [p.title, p.material, p.description, ...(p.tags ?? [])]
+    const haystack = [p.title, p.material, p.stitch, p.description, ...(p.tags ?? [])]
       .join(' ')
       .toLowerCase();
     return haystack.includes(q);
