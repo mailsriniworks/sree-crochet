@@ -1,6 +1,5 @@
-// js/scrollFx.js — scroll-linked polish: reveal-on-scroll, condensing sticky
-// header, back-to-top button, and gentle hero parallax. All motion is skipped
-// when the user prefers reduced motion.
+// js/scrollFx.js — scroll-linked polish: reveal-on-scroll + back-to-top.
+// All motion stands down when the user prefers reduced motion.
 
 const REDUCED = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
@@ -24,18 +23,13 @@ export function initScrollFx(dom) {
     targets.forEach((t) => t.classList.add('is-visible'));
   }
 
-  // ---- Condensing header + back-to-top + parallax (rAF-throttled) ----
+  // ---- Back-to-top (rAF-throttled scroll listener) ----
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      const y = window.scrollY;
-      dom.topbar.classList.toggle('topbar--compact', y > 24);
-      dom.toTop.classList.toggle('show', y > 600);
-      if (!REDUCED && dom.heroVisual) {
-        dom.heroVisual.style.transform = `translateY(${Math.min(y * 0.05, 36)}px)`;
-      }
+      dom.toTop.classList.toggle('show', window.scrollY > 600);
       ticking = false;
     });
   };

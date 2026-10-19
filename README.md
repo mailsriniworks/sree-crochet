@@ -1,43 +1,46 @@
-# ❋ Handmade Crochet — Showcase
+# ❋ Sree Crochet — Handmade Studio
 
-A lightweight, dependency-free static showcase for handmade crochet products, spanning **clothing, home goods, and accessories**.
+A lightweight, dependency-free static showcase for handmade crochet products, spanning **clothing, home goods, and accessories** — presented as a calm, pastel "studio dashboard": frosted app-frame over a dawn-gradient wash, sidebar navigation, gradient-art bento tiles, and a conversational right rail.
 
-Every piece in the collection tells the same story: natural fibers, counted loops, hours of human hands. The app is a single-page ES-module build with no framework, no bundler, and no build step — open it in a browser and it works.
+Every piece in the collection tells the same story: natural fibers, counted loops, hours of human hands. The app is a single-page ES-module build with no framework, no bundler, and no build step — serve it over HTTP and it works.
 
 ## Features
 
-- **Bento showcase** — "New Arrivals" deals carousel with slide controls, swipe, gentle auto-rotation, hero card, and an Exclusive slot that previews the next featured piece
+- **App-frame layout** — rounded frosted-glass frame on a pastel gradient wash; left nav rail (Browse / Studio), main column, and a sticky greeting rail
+- **Gradient-art system** — every product and category gets a deterministic dreamy pastel artwork (`artStyle()` / `artForCategory()` in `utils.js`), framed in white like gallery prints
+- **Bento showcase** — wide featured tile with ← → carousel (auto-rotates, pauses on interaction/drawer/hidden tab) plus three category tiles with live piece counts
+- **Greeting rail** — time-aware "Good morning/afternoon/evening", studio chat vignette, a "player pill" previewing the next featured piece, and an "Ask for anything…" pill that drafts a custom-order email
 - **Curated catalogue** — 18 sample products across three categories, loaded from `data/products.json`
-- **Search** — debounced pill search, matches titles, materials, descriptions, and tags
-- **Category pills** — All / Clothing / Home Goods / Accessories, plus a reset-filters button
-- **Sorting** — featured first, price (both directions), name A–Z
-- **Favorites** — heart any piece (cards, deals, exclusive); saved to `localStorage`; header heart pill filters to saved pieces only with a live count badge
-- **Detail drawer** — slide-in panel with rating, materials, handmade-hours, care instructions, tags, a "you may also like" related row, and a "request this piece" mailto action
-- **Scroll choreography** — sticky condensing glass header, IntersectionObserver reveal-on-scroll, gentle hero parallax, infinite value ticker, back-to-top pill
-- **Fluid feedback** — toast notifications for favorites/subscribe/filter-reset, quick-view ↗ actions that surface on card hover, custom scrollbar and selection styling
-- **Dual theme** — light / dark modes with `localStorage` persistence and system-preference detection
-- **Accessibility** — skip link, focusable cards, keyboard open/close (Enter/Space/Escape), ARIA dialog semantics, reduced-motion support
-- **Responsive** — bento collapses 3 → 2 → 1 columns; fluid card grid from phone to desktop
+- **Search** — debounced pill search in the header, matches titles, materials, descriptions, and tags
+- **Category controls** — sidebar nav + Recommended chips + bento tiles all stay in sync; page title morphs with the active category
+- **Sorting** — featured first, price (both directions), name A–Z (sidebar select)
+- **Saved pieces** — heart any piece; persisted in `localStorage`; sidebar "Saved Pieces" filters to them with a live count badge
+- **Detail drawer** — slide-in panel with gradient-art hero, rating, materials, handmade-hours, care, tags, a "you may also like" related row, and a "request this piece" mailto action
+- **Scroll choreography** — IntersectionObserver reveal-on-scroll, back-to-top pill, rAF-throttled scroll handling
+- **Fluid feedback** — toast notifications (save/unsave/reset/ask), quick-view ↗ on card hover, tile lift/zoom micro-interactions
+- **Dual theme** — dawn pastels / dusk pastels with `localStorage` persistence and system-preference detection
+- **Accessibility** — skip link, focusable tiles/cards (Enter/Space), Escape/backdrop drawer close, ARIA dialog semantics, focus restore, reduced-motion support
+- **Responsive** — frame collapses 3 → 2 → 1 columns; sidebar becomes a wrap-row on mobile
 
 ## Project structure
 
 ```
-index.html              # Single HTML entry point (topbar, bento showcase, collection grid)
-styles.css              # Full design system: tokens, bento layout, components, themes
+index.html              # App frame: sidebar rail, main column, greeting rail, drawer
+styles.css              # Design system: pastel tokens, frame, bento, rail, themes
 js/
-  main.js               # Bootstrap: DOM refs, theme init, catalogue load
-  ui.js                 # Event wiring: search, pills, sort, favorites, carousel, drawer, toasts
-  scrollFx.js           # Scroll polish: reveals, condensing header, back-to-top, parallax
+  main.js               # Bootstrap: DOM refs, greeting, theme init, catalogue load
+  ui.js                 # Event wiring: nav, chips, search, sort, saved, carousel, drawer, ask pill
+  scrollFx.js           # Scroll polish: reveal-on-scroll, back-to-top
   store.js              # Observable state container + derived selectors
   data.js               # Catalogue fetch layer
-  utils.js              # Pure helpers: escapeHtml, formatPrice, debounce, qs/qsa
+  utils.js              # Pure helpers: escapeHtml, formatPrice, debounce, artStyle/artForCategory
   components/
-    productCard.js      # Card markup + shared icons/labels/heart SVG
+    productCard.js      # White-framed gradient-art card + shared labels/icons/heart SVG
     gallery.js          # Grid rendering (incl. loading / empty / error states)
-    showcase.js         # Bento: deals carousel, hero visual, exclusive slot
+    showcase.js         # Bento: wide featured tile w/ carousel + category tiles + rail player pill
     detailPanel.js      # Slide-in drawer rendering + related row + focus management
     toast.js            # Toast notifications (aria-live root)
-    themeToggle.js      # Light/dark toggle with persistence
+    themeToggle.js      # Dawn/dusk toggle with persistence
 data/
   products.json         # Product catalogue (edit this to change the shop)
 wrangler.jsonc          # Cloudflare Workers static-assets config
@@ -104,8 +107,7 @@ npx wrangler deploy   # production
 
 ## Roadmap ideas
 
-- Replace category glyphs with real product photography
+- Replace gradient art with real product photography (swap `artStyle()` output for `background-image: url(...)`)
 - Pagination or "load more" as the catalogue grows
-- Favorites (localStorage) and a request/quote flow
 - CMS-backed content (Decap, Sanity) for non-technical updates
 - Unit tests for `store.js` selectors + CI deploy pipeline

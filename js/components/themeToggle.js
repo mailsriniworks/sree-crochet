@@ -1,12 +1,15 @@
 // js/components/themeToggle.js — light/dark theme with localStorage persistence.
-import { state, setState } from '../store.js';
+import { state, setState } from './store.js';
 
-const STORAGE_KEY = 'sree-crochet-theme';
+const STORAGE_KEY = '***';
 
-/** Apply the current theme to <html> and the toggle button label. */
+/** Apply the current theme to <html>, the nav icon, and its label. */
 function applyTheme(button) {
   document.documentElement.dataset.theme = state.theme;
-  button.textContent = state.theme === 'dark' ? '☀️' : '🌙';
+  const icon = button.querySelector('.nav-ico');
+  const label = document.getElementById('themeLabel');
+  if (icon) icon.textContent = state.theme === 'dark' ? '☀️' : '🌙';
+  if (label) label.textContent = state.theme === 'dark' ? 'Day mode' : 'Night mode';
   button.setAttribute(
     'aria-label',
     state.theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'

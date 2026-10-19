@@ -1,5 +1,5 @@
-// js/ui.js — wires DOM events to the store (search, pills, sort, favorites,
-// showcase carousel + swipe + auto-advance, drawer, toasts, newsletter).
+// js/ui.js — wires DOM events to the store: sidebar nav, chips, search, sort,
+// favorites, showcase carousel, drawer, ask-pill, toasts.
 import { state, setState, toggleFavorite } from './store.js';
 import { renderGallery } from './components/gallery.js';
 import { renderDetailPanel } from './components/detailPanel.js';
@@ -8,6 +8,13 @@ import { initToast, toast } from './components/toast.js';
 import { debounce, qsa } from './utils.js';
 
 const REDUCED = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+const PAGE_TITLES = {
+  all: 'Collection',
+  clothing: 'Clothing',
+  home: 'Home Goods',
+  accessories: 'Accessories',
+};
 
 export function setupUI(dom) {
   initToast(dom.toastRoot);
@@ -19,8 +26,8 @@ export function setupUI(dom) {
     renderDetailPanel(dom.panel, dom.panelContent);
     renderShowcase(dom);
     syncChips();
-    syncCounts();
     syncFav();
+    syncTitle();
     syncResultCount();
 
     // Restore focus to the opener when the drawer closes (a11y).
@@ -39,15 +46,15 @@ export function setupUI(dom) {
     dom.gallery.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
   });
 
-  // ---- Category pills ----
-  qsa('[data-category-chip]').forEach((chip) => {
-    chip.addEventListener('click', () => setState({ category: chip.dataset.categoryChip }));
+  // ---- Category controls: sidebar nav, chips, bento category tiles ----
+  qsa('[data-category-chip]').forEach((el) => {
+    el.addEventListener('click', () => setState({ category: el.dataset.categoryChip }));
   });
 
   // ---- Sort ----
   dom.sort.addEventListener('change', (e) => setState({ sort: e.target.value }));
 
-  // ---- Filter icon = reset all filters ----
+  // ---- Reset filters ----
   dom.filterBtn.addEventListener('click', () => {
     dom.search.value = '';
     dom.sort.value = 'featured';
@@ -55,33 +62,23 @@ export function setupUI(dom) {
     toast('Filters reset', '↺');
   });
 
-  // ---- Favorites-only toggle (header heart pill) ----
+  // ---- Saved-pieces view (sidebar) ----
   dom.favPill.addEventListener('click', () => {
     const next = !state.favOnly;
     setState({ favOnly: next });
     if (next) toast(`Showing ${state.favorites.length} saved ${state.favorites.length === 1 ? 'piece' : 'pieces'}`, '♥');
   });
 
-  // ---- Showcase carousel: buttons, swipe, gentle auto-advance ----
+  // ---- Showcase carousel (buttons inside the wide tile) ----
   let lastManual = Date.now();
-  const manualStep = (dir) => {
-    lastManual = Date.now();
-    stepShowcase(dir);
-    renderShowcase(dom);
-  };
-  dom.prevDeal.addEventListener('click', () => manualStep(-1));
-  dom.nextDeal.addEventListener('click', () => manualStep(1));
-
-  let swipeX = null;
-  let swipeY = null;
-  const dealsEl = document.querySelector('.bento-deals');
-  dealsEl?.addEventListener('pointerdown', (e) => { swipeX = e.clientX; swipeY = e.clientY; });
-  dealsEl?.addEventListener('pointerup', (e) => {
-    if (swipeX === null) return;
-    const dx = e.clientX - swipeX;
-    const dy = e.clientY - swipeY;
-    swipeX = swipeY = null;
-    if (Math.abs(dx) > 40 && Math.abs(dy) < 60) manualStep(dx < 0 ? 1 : -1);
+  document.addEventListener('click', (e) => {
+    const step = e.target.closest('[data-step]');
+    if (step) {
+      e.stopPropagation();
+      lastManual = Date.now();
+      stepShowcase(Number(step.dataset.step));
+      renderShowcase(dom);
+    }
   });
 
   setInterval(() => {
@@ -92,7 +89,7 @@ export function setupUI(dom) {
     renderShowcase(dom);
   }, 6000);
 
-  // ---- Delegated clicks: hearts, quick-open, exclusive, cards, related ----
+  // ---- Delegated clicks: hearts, quick-open, tiles, cards, related ----
   document.addEventListener('click', (e) => {
     const fav = e.target.closest('[data-fav-id]');
     if (fav && fav.dataset.favId) {
@@ -108,12 +105,6 @@ export function setupUI(dom) {
       setState({ selectedId: open.dataset.openId });
       return;
     }
-    const exclusive = e.target.closest('#openExclusive, #openExclusiveArrow');
-    if (exclusive && exclusive.dataset.productId) {
-      dom.lastFocus = exclusive;
-      setState({ selectedId: exclusive.dataset.productId });
-      return;
-    }
     const card = e.target.closest('[data-product-id]');
     if (card) {
       dom.lastFocus = card;
@@ -121,14 +112,17 @@ export function setupUI(dom) {
     }
   });
 
-  // ---- Keyboard: Enter/Space opens a focused card ----
-  dom.gallery.addEventListener('keydown', (e) => {
+  // ---- Keyboard: Enter/Space on cards and bento tiles ----
+  document.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' && e.key !== ' ') return;
-    const card = e.target.closest('[data-product-id]');
-    if (card && e.target === card) {
+    const tile = e.target.closest('.tile[role="button"], .p-card[role="button"]');
+    if (tile && e.target === tile) {
       e.preventDefault();
-      dom.lastFocus = card;
-      setState({ selectedId: card.dataset.productId });
+      dom.lastFocus = tile;
+      setState({
+        selectedId: tile.dataset.openId ?? tile.dataset.productId ?? state.selectedId,
+        category: tile.dataset.categoryChip ?? state.category,
+      });
     }
   });
 
@@ -140,32 +134,33 @@ export function setupUI(dom) {
     if (e.key === 'Escape' && state.selectedId) closePanel();
   });
 
-  // ---- Newsletter (demo submit) ----
-  dom.newsletter.addEventListener('submit', (e) => {
+  // ---- Ask pill: draft a custom-order email ----
+  dom.askForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    dom.newsMsg.hidden = false;
-    dom.newsletter.reset();
-    toast("You're on the list — welcome!", '🧶');
+    const wish = dom.askInput.value.trim();
+    if (!wish) return;
+    window.location.href = `mailto:hello@example.com?subject=${encodeURIComponent(
+      'Custom request'
+    )}&body=${encodeURIComponent(`Hi Sree Crochet! ${wish}`)}`;
+    dom.askInput.value = '';
+    toast('Opening your mail app with the request…', '✉️');
   });
 
   // ---- Sync helpers ----
   function syncChips() {
-    qsa('[data-category-chip]').forEach((chip) => {
-      chip.setAttribute('aria-pressed', String(chip.dataset.categoryChip === state.category));
-    });
-  }
-
-  function syncCounts() {
-    const counts = { all: state.products.length, clothing: 0, home: 0, accessories: 0 };
-    state.products.forEach((p) => { counts[p.category] = (counts[p.category] ?? 0) + 1; });
-    qsa('[data-count]').forEach((el) => {
-      el.textContent = counts[el.dataset.count] != null ? String(counts[el.dataset.count]) : '';
+    qsa('[data-category-chip]').forEach((el) => {
+      el.setAttribute('aria-pressed', String(el.dataset.categoryChip === state.category));
     });
   }
 
   function syncFav() {
     dom.favCount.textContent = String(state.favorites.length);
     dom.favPill.setAttribute('aria-pressed', String(state.favOnly));
+  }
+
+  function syncTitle() {
+    if (!dom.pageTitle) return;
+    dom.pageTitle.textContent = state.favOnly ? 'Saved Pieces' : PAGE_TITLES[state.category] ?? 'Collection';
   }
 
   function syncResultCount() {

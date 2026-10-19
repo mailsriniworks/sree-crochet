@@ -4,190 +4,135 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Sree Crochet — handmade crochet clothing, home goods, and accessories. Every piece hand-stitched from natural fibers." />
-  <title>Sree Crochet — Clothing, Home Goods &amp; Accessories</title>
+  <title>Sree Crochet — Handmade Studio</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============ Top pill bar (sticky, condenses on scroll) ============ -->
-  <header class="topbar" id="topbar">
-    <div class="topbar-row container">
-      <a class="brand-pill" href="#main">
-        <span class="brand-logo" aria-hidden="true">❋</span>
+  <div class="app-frame">
+    <!-- ============ Left rail ============ -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="orb" aria-hidden="true"></span>
         <span class="brand-name">Sree Crochet</span>
-      </a>
-
-      <div class="search-pill">
-        <input id="search" type="search" placeholder="Search the collection" aria-label="Search the collection" />
-        <button class="search-btn" id="searchBtn" aria-label="Search">
-          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-          </svg>
-        </button>
       </div>
 
-      <div class="top-actions">
-        <button id="themeToggle" class="pill-icon" aria-label="Toggle theme">🌙</button>
-        <button id="favPill" class="pill-icon pill-icon--fav" aria-label="Show saved pieces only" aria-pressed="false">
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          <span id="favCount" class="count-badge">0</span>
+      <p class="nav-label">Browse</p>
+      <nav class="side-nav" aria-label="Browse categories">
+        <button class="nav-item" data-category-chip="all" aria-pressed="true">
+          <span class="nav-ico" aria-hidden="true">▦</span> Collection
         </button>
-        <a class="pill-icon" href="mailto:hello@example.com" aria-label="Contact the studio">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 8h12l1.2 12H4.8L6 8z"></path><path d="M9 10V6a3 3 0 0 1 6 0v4"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="catbar container">
-      <button class="icon-round" id="filterBtn" title="Reset filters" aria-label="Reset filters">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line>
-          <circle cx="9" cy="6" r="2.2" fill="currentColor" stroke="none"></circle>
-          <circle cx="15" cy="12" r="2.2" fill="currentColor" stroke="none"></circle>
-          <circle cx="7" cy="18" r="2.2" fill="currentColor" stroke="none"></circle>
-        </svg>
-      </button>
-
-      <nav class="cat-pills" aria-label="Browse by category">
-        <button class="cat-pill" data-category-chip="all" aria-pressed="true">All<span class="pill-count" data-count="all"></span></button>
-        <button class="cat-pill" data-category-chip="clothing" aria-pressed="false">Clothing<span class="pill-count" data-count="clothing"></span></button>
-        <button class="cat-pill" data-category-chip="home" aria-pressed="false">Home Goods<span class="pill-count" data-count="home"></span></button>
-        <button class="cat-pill" data-category-chip="accessories" aria-pressed="false">Accessories<span class="pill-count" data-count="accessories"></span></button>
+        <button class="nav-item" data-category-chip="clothing" aria-pressed="false">
+          <span class="nav-ico" aria-hidden="true">🧥</span> Clothing
+        </button>
+        <button class="nav-item" data-category-chip="home" aria-pressed="false">
+          <span class="nav-ico" aria-hidden="true">🛋️</span> Home Goods
+        </button>
+        <button class="nav-item" data-category-chip="accessories" aria-pressed="false">
+          <span class="nav-ico" aria-hidden="true">👜</span> Accessories
+        </button>
       </nav>
 
-      <select id="sort" class="sort-pill" aria-label="Sort collection">
-        <option value="featured">Featured</option>
-        <option value="price-asc">Price: low → high</option>
-        <option value="price-desc">Price: high → low</option>
-        <option value="name">Name A–Z</option>
-      </select>
-    </div>
-  </header>
+      <p class="nav-label">Studio</p>
+      <nav class="side-nav" aria-label="Studio">
+        <button class="nav-item" id="favPill" aria-pressed="false">
+          <span class="nav-ico nav-ico--coral" aria-hidden="true">♥</span> Saved Pieces
+          <span id="favCount" class="nav-badge">0</span>
+        </button>
+        <a class="nav-item" href="mailto:hello@example.com?subject=Custom%20order">
+          <span class="nav-ico" aria-hidden="true">✉️</span> Custom Orders
+        </a>
+        <button class="nav-item" id="themeToggle">
+          <span class="nav-ico" aria-hidden="true">🌙</span> <span id="themeLabel">Night mode</span>
+        </button>
+        <a class="nav-item" href="https://github.com/mailsriniworks/sree-crochet">
+          <span class="nav-ico" aria-hidden="true">↗</span> Source
+        </a>
+      </nav>
 
-  <main id="main" class="container">
-    <!-- ============ Bento showcase ============ -->
-    <section class="bento" aria-label="Featured pieces">
-      <article class="bento-deals reveal">
-        <h2 class="bento-title">New Arrivals</h2>
-        <div class="deal-slot" id="dealSlot"></div>
-        <div class="slide-bar">
-          <button id="prevDeal" class="round-btn round-light" aria-label="Previous piece">←</button>
-          <span class="slide-hint">Slide left and right</span>
-          <button id="nextDeal" class="round-btn round-dark" aria-label="Next piece">→</button>
-        </div>
-      </article>
-
-      <article class="bento-hero reveal">
-        <h2 class="bento-title">Handmade With Heart</h2>
-        <p class="bento-sub">Every loop counted by hand — natural &amp; recycled fibers</p>
-        <div class="hero-visual" id="heroVisual" aria-hidden="true"></div>
-        <div class="rating-pill" id="heroRating"><span class="star">★</span> 4.9</div>
-      </article>
-
-      <article class="bento-exclusive reveal">
-        <span class="label-pill">Exclusive</span>
-        <div class="exclusive-grid">
-          <div class="exclusive-copy">
-            <h3 id="exclusiveTitle">—</h3>
-            <p id="exclusiveDesc" class="muted">—</p>
-          </div>
-          <div class="exclusive-visual" id="exclusiveVisual">
-            <span class="excl-glyph" id="exclusiveGlyph" aria-hidden="true">🧶</span>
-            <button class="heart-btn" data-fav-id="" aria-label="Save to favorites" aria-pressed="false">
-              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            </button>
-            <div class="open-cluster">
-              <button class="open-btn" id="openExclusive">Open</button>
-              <button class="round-btn round-dark" id="openExclusiveArrow" aria-label="Open details">↗</button>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <aside class="bento-side reveal">
-        <section class="side-card">
-          <span class="label-pill">Our Studio</span>
-          <p class="side-copy"><strong>Our studio</strong> <span class="muted">designs cozy, sustainable crochet pieces</span> <strong>by hand.</strong></p>
-          <div class="avatars" aria-hidden="true">
-            <span class="avatar avatar-1">S</span>
-            <span class="avatar avatar-2">R</span>
-            <span class="avatar avatar-3">E</span>
-          </div>
-        </section>
-        <section class="side-card">
-          <span class="label-pill">Get a bonus</span>
-          <p class="side-copy"><strong>Discover</strong> <span class="muted">new drops &amp; patterns first.</span></p>
-          <form id="newsletter" class="news-form">
-            <input type="email" placeholder="Email" aria-label="Email address" required />
-            <button class="subscribe-btn" type="submit">Subscribe</button>
-          </form>
-          <p id="newsMsg" class="news-msg" hidden>You're on the list 🧶</p>
-        </section>
-        <section class="side-card">
-          <span class="label-pill">Our promise</span>
-          <p class="side-copy"><strong>Join us</strong> <span class="muted">— slow-made, small-batch, shipped with care.</span></p>
-        </section>
-      </aside>
-    </section>
-
-    <!-- ============ Value ticker ============ -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span>Handmade with heart</span><span class="tick-dot">❋</span>
-        <span>Natural &amp; recycled fibers</span><span class="tick-dot">❋</span>
-        <span>Made to order</span><span class="tick-dot">❋</span>
-        <span>Small batch</span><span class="tick-dot">❋</span>
-        <span>Ships plastic-free</span><span class="tick-dot">❋</span>
-        <span>Custom colors welcome</span><span class="tick-dot">❋</span>
-        <span>Handmade with heart</span><span class="tick-dot">❋</span>
-        <span>Natural &amp; recycled fibers</span><span class="tick-dot">❋</span>
-        <span>Made to order</span><span class="tick-dot">❋</span>
-        <span>Small batch</span><span class="tick-dot">❋</span>
-        <span>Ships plastic-free</span><span class="tick-dot">❋</span>
-        <span>Custom colors welcome</span><span class="tick-dot">❋</span>
+      <div class="side-foot">
+        <button class="icon-round" id="filterBtn" title="Reset filters" aria-label="Reset filters">↺</button>
+        <select id="sort" class="sort-ghost" aria-label="Sort collection">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price ↑</option>
+          <option value="price-desc">Price ↓</option>
+          <option value="name">A–Z</option>
+        </select>
       </div>
+    </aside>
+
+    <!-- ============ Main column ============ -->
+    <div class="main-col" id="main">
+      <header class="main-head">
+        <h1 id="pageTitle">Collection</h1>
+        <div class="search-pill">
+          <span class="search-ico" aria-hidden="true">⌕</span>
+          <input id="search" type="search" placeholder="Search…" aria-label="Search the collection" />
+          <button class="search-btn" id="searchBtn" aria-label="Search">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="bento reveal" id="bento" aria-label="Featured pieces and categories"></section>
+
+      <section class="reco" aria-label="Recommended">
+        <div class="reco-head reveal">
+          <h2>Recommended <span class="count" id="resultCount"></span></h2>
+          <div class="chips" role="group" aria-label="Filter by category">
+            <button class="chip" data-category-chip="all" aria-pressed="true">Everything</button>
+            <button class="chip" data-category-chip="clothing" aria-pressed="false">Clothing</button>
+            <button class="chip" data-category-chip="home" aria-pressed="false">Home</button>
+            <button class="chip" data-category-chip="accessories" aria-pressed="false">Accessories</button>
+          </div>
+        </div>
+        <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
+      </section>
     </div>
 
-    <!-- ============ Full collection ============ -->
-    <section class="collection" aria-label="Full collection">
-      <div class="collection-head reveal">
-        <h2>The Collection <span class="count" id="resultCount"></span></h2>
-      </div>
-      <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
-    </section>
+    <!-- ============ Right rail ============ -->
+    <aside class="rail">
+      <section class="rail-card reveal">
+        <span class="orb orb--lg" aria-hidden="true"></span>
+        <h2 class="greet"><span id="greetTime">Good morning</span>,<br /><strong>friend</strong> — what's on your mind?</h2>
 
-    <!-- ============ Values ============ -->
-    <section class="values" aria-label="Why handmade">
-      <div class="value reveal">
-        <span class="value-icon" aria-hidden="true">🌿</span>
-        <h3>Natural fibers</h3>
-        <p>Merino, alpaca, linen &amp; recycled cotton — chosen to last for years, not seasons.</p>
-      </div>
-      <div class="value reveal">
-        <span class="value-icon" aria-hidden="true">✋</span>
-        <h3>Made to order</h3>
-        <p>Every piece begins when you order it. Zero waste, full intention, one hook at a time.</p>
-      </div>
-      <div class="value reveal">
-        <span class="value-icon" aria-hidden="true">📦</span>
-        <h3>Ships with care</h3>
-        <p>Plastic-free packaging and a handwritten note tucked into every single box.</p>
-      </div>
-    </section>
+        <div class="chat">
+          <div class="chat-row chat-row--you">
+            <span class="chat-orb chat-orb--you" aria-hidden="true"></span>
+            <span class="chat-name">You</span>
+          </div>
+          <p class="chat-bubble chat-bubble--you">Hi, I'm looking for something handmade and cozy — but I don't know where to start.</p>
+          <div class="chat-row">
+            <span class="chat-orb" aria-hidden="true"></span>
+            <span class="chat-name">Studio</span>
+          </div>
+          <p class="chat-bubble">Absolutely 🧶 Every piece here is stitched by hand from natural fibers. Tell us the mood — cozy, breezy, gift — and we'll guide you.</p>
+        </div>
 
-    <!-- ============ Quote ============ -->
-    <section class="quote-band reveal">
-      <blockquote>“The throw is the coziest thing we own — you can feel the hours in every stitch.”</blockquote>
-      <cite>— Priya M., verified customer</cite>
-    </section>
-  </main>
+        <div id="railPlayer"></div>
+
+        <form id="askForm" class="ask-pill">
+          <input id="askInput" type="text" placeholder="Ask for anything…" aria-label="Request a custom piece" />
+          <button type="submit" class="ask-send" aria-label="Send request">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13"></line><path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+            </svg>
+          </button>
+        </form>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>❋ Sree Crochet — made with care · natural &amp; recycled fibers · custom orders welcome</p>
+  </footer>
 
   <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
 
@@ -198,18 +143,6 @@
   </aside>
 
   <div id="toastRoot" class="toast-root" role="status" aria-live="polite"></div>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span class="brand-pill brand-pill--small"><span class="brand-logo" aria-hidden="true">❋</span> Sree Crochet</span>
-      <p class="muted">Made with care · Natural &amp; recycled fibers · Custom orders welcome</p>
-      <div class="footer-links">
-        <a href="mailto:hello@example.com">Contact</a>
-        <a href="#main">Shop</a>
-        <a href="https://github.com/mailsriniworks/sree-crochet">GitHub</a>
-      </div>
-    </div>
-  </footer>
 
   <script type="module" src="./js/main.js"></script>
 </body>

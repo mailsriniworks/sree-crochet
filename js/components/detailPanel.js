@@ -1,6 +1,6 @@
 // js/components/detailPanel.js — slide-in drawer showing a single product.
 import { state } from '../store.js';
-import { escapeHtml, formatPrice } from '../utils.js';
+import { escapeHtml, formatPrice, artStyle } from '../utils.js';
 import { CATEGORY_LABELS, iconFor } from './productCard.js';
 
 /** Render (or close) the detail drawer based on state.selectedId. */
@@ -18,7 +18,7 @@ export function renderDetailPanel(panel, content) {
   const label = CATEGORY_LABELS[product.category] ?? product.category;
 
   content.innerHTML = `
-    <div class="panel-hero" aria-hidden="true">
+    <div class="panel-hero" style="${artStyle(product.id)}" aria-hidden="true">
       <span class="panel-glyph">${iconFor(product.category)}</span>
     </div>
     <div class="panel-body">
@@ -80,7 +80,7 @@ function relatedHtml(current) {
             (r) => `
           <button class="related-item" data-product-id="${escapeHtml(r.id)}"
                   aria-label="View ${escapeHtml(r.title)}">
-            <span class="related-visual" aria-hidden="true">${iconFor(r.category)}</span>
+            <span class="related-visual" style="${artStyle(r.id)}" aria-hidden="true"></span>
             <span class="related-name">${escapeHtml(r.title)}</span>
             <span class="related-price">${formatPrice(r.price)}</span>
           </button>`
