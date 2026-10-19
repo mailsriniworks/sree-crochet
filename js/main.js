@@ -6,7 +6,7 @@ import { initTheme } from './components/themeToggle.js';
 
 const dom = {
   search: document.getElementById('search'),
-  categoryFilter: document.getElementById('categoryFilter'),
+  searchBtn: document.getElementById('searchBtn'),
   sort: document.getElementById('sort'),
   gallery: document.getElementById('galleryGrid'),
   resultCount: document.getElementById('resultCount'),
@@ -15,7 +15,22 @@ const dom = {
   panelBackdrop: document.getElementById('panelBackdrop'),
   closePanel: document.getElementById('closePanel'),
   themeToggle: document.getElementById('themeToggle'),
-  viewAllBtn: document.getElementById('viewAllBtn'),
+  favPill: document.getElementById('favPill'),
+  favCount: document.getElementById('favCount'),
+  filterBtn: document.getElementById('filterBtn'),
+  dealSlot: document.getElementById('dealSlot'),
+  prevDeal: document.getElementById('prevDeal'),
+  nextDeal: document.getElementById('nextDeal'),
+  heroVisual: document.getElementById('heroVisual'),
+  heroRating: document.getElementById('heroRating'),
+  exclusiveTitle: document.getElementById('exclusiveTitle'),
+  exclusiveDesc: document.getElementById('exclusiveDesc'),
+  exclusiveVisual: document.getElementById('exclusiveVisual'),
+  exclusiveGlyph: document.getElementById('exclusiveGlyph'),
+  openExclusive: document.getElementById('openExclusive'),
+  openExclusiveArrow: document.getElementById('openExclusiveArrow'),
+  newsletter: document.getElementById('newsletter'),
+  newsMsg: document.getElementById('newsMsg'),
   subscribe,
 };
 

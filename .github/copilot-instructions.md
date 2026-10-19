@@ -7,7 +7,8 @@ A dependency-free, vanilla JavaScript single-page application showcasing handmad
 
 ### State Management
 - **Single observable store** (`js/store.js`): one exported `state` object plus `setState(patch)` / `subscribe(fn)`.
-- State fields: `products`, `search`, `category`, `sort`, `selectedId`, `theme`, `loading`, `error`.
+- State fields: `products`, `search`, `category`, `sort`, `selectedId`, `favorites` (ids, localStorage-persisted), `favOnly`, `theme`, `loading`, `error`.
+- Favorites toggle via `toggleFavorite(id)`; the header heart pill flips `favOnly` to filter the gallery to saved pieces.
 - UI events call `setState`; a single subscriber in `js/ui.js` re-renders gallery + detail panel from state. **Never mutate the DOM from event handlers directly — change state instead.**
 - Derived data lives in selectors (`getVisibleProducts()`) — filtering and sorting are pure functions of state.
 
@@ -17,13 +18,14 @@ index.html                  # Single HTML entry point
 styles.css                  # Complete design system (CSS custom properties, light/dark)
 js/
   main.js                   # Bootstrap: collect DOM refs into `dom`, init theme, load catalogue
-  ui.js                     # All event wiring (search, filter, sort, card select, drawer close, CTA)
-  store.js                  # Observable state + getVisibleProducts() selector
+  ui.js                     # All event wiring (search, pills, sort, favorites, carousel, drawer, newsletter)
+  store.js                  # Observable state + getVisibleProducts() selector + toggleFavorite()
   data.js                   # loadProducts() — fetch ./data/products.json
   utils.js                  # Pure helpers: escapeHtml, formatPrice, debounce, qs, qsa, elFromHtml
   components/
-    productCard.js          # productCardHtml(product, index) — card markup w/ staggered animation delay
+    productCard.js          # productCardHtml(product, index) + CATEGORY_LABELS/ICONS, HEART_SVG, iconFor()
     gallery.js              # renderGallery(root) — grid, loading spinner, empty, and error states
+    showcase.js             # renderShowcase(dom) + stepShowcase(dir) — bento deals carousel/hero/exclusive
     detailPanel.js          # renderDetailPanel(panel, content) — drawer render/close + focus management
     themeToggle.js          # initTheme(button) — localStorage persistence, system-preference fallback
 data/
@@ -33,15 +35,17 @@ wrangler.jsonc              # Cloudflare Workers config (name: sree-crochet, ass
 
 ### Rendering Flow
 1. `main.js` builds the `dom` object (all element refs), calls `initTheme()`, `setupUI(dom)`, then `loadCatalogue()`.
-2. `setupUI` registers one store subscriber that re-renders gallery + panel + chip active states + result count on every state change.
-3. Gallery cards use `data-product-id`; clicks/Enter/Space on cards set `selectedId`.
-4. Drawer opens when `selectedId` matches a product; closes via ×, backdrop click, or Escape (sets `selectedId: null`).
-5. Load errors set `state.error`; gallery renders a retry button wired through `dom.retry`.
+2. `setupUI` registers one store subscriber that re-renders gallery + panel + showcase + chip/fav/count sync on every state change.
+3. One delegated `document` click handler routes: `[data-fav-id]` → toggleFavorite, `[data-open-id]` and `#openExclusive(Arrow)` → selectedId, `[data-product-id]` cards → selectedId.
+4. Gallery cards also open on Enter/Space when the card itself is focused.
+5. Drawer opens when `selectedId` matches a product; closes via ×, backdrop click, or Escape (sets `selectedId: null`).
+6. Bento showcase (`showcase.js`) keeps a module-local carousel index over `featured` products; prev/next buttons call `stepShowcase(±1)` then `renderShowcase(dom)`. The exclusive slot always previews the next featured piece.
+7. Load errors set `state.error`; gallery renders a retry button wired through `dom.retry`.
 
 ### Data Format (`data/products.json`)
-Array of products: `id`, `title`, `category` (`clothing`|`home`|`accessories`), `price` (number, USD), `material`, `timeHours`, optional `featured` (boolean), `description`, optional `care`, `tags[]`.
+Array of products: `id`, `title`, `category` (`clothing`|`home`|`accessories`), `price` (number, USD), optional `rating` (number, default 4.8), `material`, `timeHours`, optional `featured` (boolean), `description`, optional `care`, `tags[]`.
 
-- `featured` items get a badge and sort first under the default `sort: 'featured'`.
+- `featured` items get a badge, sort first under the default `sort: 'featured'`, and drive the bento showcase carousel.
 - Search matches title + material + description + tags (case-insensitive substring).
 
 ## Key Conventions
