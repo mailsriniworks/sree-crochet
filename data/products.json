@@ -1,45 +1,45 @@
 [
   {
-    "id": "crochet-cardigan-01",
-    "title": "Heirloom Cable Cardigan",
-    "category": "clothing",
-    "price": 145,
-    "rating": 4.9,
-    "stitch": "Aran cables & 2\u00d72 rib",
-    "hook": "5.0 mm",
-    "material": "Merino wool",
-    "timeHours": 40,
+    "id": "crochet-hairband-19",
+    "title": "Marigold Bow Hair Band",
+    "category": "accessories",
+    "price": 22,
+    "rating": 4.8,
+    "stitch": "Single-crochet band with bow motif",
+    "hook": "3.5 mm",
+    "material": "Organic cotton",
+    "timeHours": 3,
     "featured": true,
-    "description": "A relaxed-fit cardigan worked in classic cable panels with deep pockets and hand-carved wooden buttons. Perfect for layering through crisp mornings and cool evenings.",
+    "description": "A cheerful crocheted hair band crowned with an oversized bow \u2014 snug enough to stay put, soft enough to forget. The marigold colorway pairs with everything in your wardrobe.",
     "care": "Hand wash cold, dry flat",
     "tags": [
-      "cardigan",
-      "cables",
-      "wool",
-      "layering"
+      "hair band",
+      "headband",
+      "bow",
+      "gift"
     ],
-    "image": "./assets/img/crochet-cardigan-01.jpg"
+    "image": "./assets/img/crochet-hairband-19.jpg"
   },
   {
-    "id": "crochet-pullover-02",
-    "title": "Meadow Granny-Square Pullover",
-    "category": "clothing",
-    "price": 118,
-    "rating": 4.8,
-    "stitch": "Granny squares, joined-as-you-go",
-    "hook": "4.0 mm",
-    "material": "Organic cotton",
-    "timeHours": 32,
+    "id": "crochet-keychain-20",
+    "title": "Midnight Witch Cat Keychain",
+    "category": "accessories",
+    "price": 18,
+    "rating": 4.9,
+    "stitch": "Amigurumi single crochet, magic ring",
+    "hook": "2.5 mm",
+    "material": "Cotton yarn",
+    "timeHours": 4,
     "featured": true,
-    "description": "Thirty-six hand-joined granny squares in a warm meadow palette. Each square is stitched individually, then blocked and seamed for a soft, breathable everyday sweater.",
-    "care": "Machine wash gentle, dry flat",
+    "description": "A tiny black cat in a crocheted witch hat, finished with a ribbon and a sturdy brass keyring. A pocket-sized companion for bags, keys, and gift toppers.",
+    "care": "Spot clean only",
     "tags": [
-      "pullover",
-      "granny square",
-      "boho",
-      "cotton"
+      "keychain",
+      "charm",
+      "amigurumi",
+      "gift"
     ],
-    "image": "./assets/img/crochet-pullover-02.jpg"
+    "image": "./assets/img/crochet-keychain-20.jpg"
   },
   {
     "id": "crochet-top-03",
