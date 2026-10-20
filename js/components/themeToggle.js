@@ -1,5 +1,5 @@
 // js/components/themeToggle.js — day/evening theme with localStorage persistence.
-import { state, setState } from './store.js';
+import { state, setState } from '../store.js';
 
 const STORAGE_KEY = '***';
 

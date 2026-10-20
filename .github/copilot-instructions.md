@@ -78,6 +78,7 @@ Console: `[sree-crochet] loaded N products`.
 - Drawers won't open → element needs `data-product-id` / `#cartBtn`; both drawers share `#drawerBackdrop`.
 - Cart not persisting → localStorage blocked (private mode); store keeps in-memory copy.
 - **Live site unchanged after edits** → must `git push` + `npx wrangler deploy`; Workers serves deployed assets only.
+- **Page renders nothing / hero `src=""` / empty gallery / one 404 js path in console** → a single unresolved ES-module import kills the whole module graph (real incident: a component importing `'./store.js'` instead of `'../store.js'` → `/js/components/store.js` 404 → app never boots; looked like "missing images" but assets were fine). Before shipping, run the static resolver: walk `js/`, resolve every relative `from '…'`/`import '…'` against the filesystem, plus every `./…` ref in `index.html` and every `products[].image` path.
 
 ## Deployment
 ```bash
