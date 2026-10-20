@@ -18,7 +18,7 @@
       "wool",
       "layering"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Simple_sweater_dress_with_with_turtleneck_-_pose_1.jpg/1920px-Simple_sweater_dress_with_with_turtleneck_-_pose_1.jpg"
+    "image": "./assets/img/crochet-cardigan-01.jpg"
   },
   {
     "id": "crochet-pullover-02",
@@ -39,7 +39,7 @@
       "boho",
       "cotton"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Simple_sweater_dress_with_with_turtleneck_-_pose_2.jpg/1920px-Simple_sweater_dress_with_with_turtleneck_-_pose_2.jpg"
+    "image": "./assets/img/crochet-pullover-02.jpg"
   },
   {
     "id": "crochet-top-03",
@@ -59,7 +59,7 @@
       "lace",
       "linen"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_3.jpg/1920px-Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_3.jpg"
+    "image": "./assets/img/crochet-top-03.jpg"
   },
   {
     "id": "crochet-shawl-04",
@@ -79,7 +79,7 @@
       "elegant",
       "lightweight"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_4.jpg/1920px-Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_4.jpg"
+    "image": "./assets/img/crochet-shawl-04.jpg"
   },
   {
     "id": "crochet-vest-05",
@@ -99,7 +99,7 @@
       "unisex",
       "fall"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Blanket_of_natural_dyed_yarn.jpg/1920px-Blanket_of_natural_dyed_yarn.jpg"
+    "image": "./assets/img/crochet-vest-05.jpg"
   },
   {
     "id": "crochet-throw-06",
@@ -120,7 +120,7 @@
       "chunky",
       "cozy"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Blue%2C_pink%2C_white%2C_purple_crochet_blanket_2.jpg/1920px-Blue%2C_pink%2C_white%2C_purple_crochet_blanket_2.jpg"
+    "image": "./assets/img/crochet-throw-06.jpg"
   },
   {
     "id": "crochet-pillow-07",
@@ -140,7 +140,7 @@
       "granny square",
       "boho"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Brown%2C_pink%2C_purple_crochet_blanket.jpg/1920px-Brown%2C_pink%2C_purple_crochet_blanket.jpg"
+    "image": "./assets/img/crochet-pillow-07.jpg"
   },
   {
     "id": "crochet-runner-08",
@@ -160,7 +160,7 @@
       "vintage",
       "pineapple"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Table-cloth_2008-1.jpg/1920px-Table-cloth_2008-1.jpg"
+    "image": "./assets/img/crochet-runner-08.jpg"
   },
   {
     "id": "crochet-basket-09",
@@ -180,7 +180,7 @@
       "organization",
       "set"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Filet_crochet_sofa_blanket.jpg/1920px-Filet_crochet_sofa_blanket.jpg"
+    "image": "./assets/img/crochet-basket-09.jpg"
   },
   {
     "id": "crochet-garland-10",
@@ -200,7 +200,7 @@
       "decor",
       "nursery"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Christmas_Crochet_at_Greenock_pillarbox_11.jpg/1920px-Christmas_Crochet_at_Greenock_pillarbox_11.jpg"
+    "image": "./assets/img/crochet-garland-10.jpg"
   },
   {
     "id": "crochet-coasters-11",
@@ -220,7 +220,7 @@
       "set",
       "recycled"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Crochet_blanket_in_progress_close-up.jpg/1920px-Crochet_blanket_in_progress_close-up.jpg"
+    "image": "./assets/img/crochet-coasters-11.jpg"
   },
   {
     "id": "crochet-beanie-12",
@@ -241,7 +241,7 @@
       "alpaca",
       "winter"
     ],
-    "image": "https://upload.wikimedia.org/wikipedia/commons/8/82/Crochet_hat_%2810696418025%29.jpg"
+    "image": "./assets/img/crochet-beanie-12.jpg"
   },
   {
     "id": "crochet-tote-13",
@@ -261,7 +261,7 @@
       "market",
       "sustainable"
     ],
-    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Crochet_bag.jpg"
+    "image": "./assets/img/crochet-tote-13.jpg"
   },
   {
     "id": "crochet-gloves-14",
@@ -281,7 +281,7 @@
       "fingerless",
       "gift"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_2.jpg/1920px-Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_2.jpg"
+    "image": "./assets/img/crochet-gloves-14.jpg"
   },
   {
     "id": "crochet-scarf-15",
@@ -301,7 +301,7 @@
       "herringbone",
       "wool"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Crochet_scarf_in_two_shades_of_blue.jpg/1920px-Crochet_scarf_in_two_shades_of_blue.jpg"
+    "image": "./assets/img/crochet-scarf-15.jpg"
   },
   {
     "id": "crochet-hairclips-16",
@@ -321,7 +321,7 @@
       "daisy",
       "set"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Amigurumi_Cactus.jpg/1920px-Amigurumi_Cactus.jpg"
+    "image": "./assets/img/crochet-hairclips-16.jpg"
   },
   {
     "id": "crochet-keychain-17",
@@ -341,7 +341,7 @@
       "gift",
       "rainbow"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Amigurumi_Chick.jpg/1920px-Amigurumi_Chick.jpg"
+    "image": "./assets/img/crochet-keychain-17.jpg"
   },
   {
     "id": "crochet-earrings-18",
@@ -361,6 +361,6 @@
       "hoops",
       "lightweight"
     ],
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Crochet_Blanket_Stitch.jpg/1920px-Crochet_Blanket_Stitch.jpg"
+    "image": "./assets/img/crochet-earrings-18.jpg"
   }
 ]

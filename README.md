@@ -18,7 +18,7 @@ No framework, no bundler, no build step — ES modules served as static assets.
 
 ### Craft showcase
 - **Editorial hero stage** — rounded bone card on grey: vertical wordmark, caps nav, giant vertical didone columns with yellow dot, inset work-in-progress photo, rotated yellow price tag, breakout featured photo spilling below the stage with circular next-arrow and spinning stamp; arrows cycle the featured pieces
-- **Real photography** — every product carries a `image` URL (Wikimedia Commons crochet photos); gradient art remains as backdrop/fallback if a photo fails
+- **Real photography, bundled** — 21 crochet photos (sourced from Wikimedia Commons, downloaded at 800–1280px) live in `assets/img/` and are referenced locally, so they load everywhere with no hotlink dependency; gradient art remains as backdrop/fallback
 - **Yellow marquee band** with studio promises, pausing on hover
 - **Hero** with studio stats computed from the catalogue (designs, total hours by hand, fiber promise) in the maker section, plus a two-photo collage
 - **The Maker** — forest-green band: founder quote + facts beside a four-step process timeline (design & swatch → choose the yarn → stitch by stitch → block, finish, send)
@@ -53,6 +53,8 @@ js/
     themeToggle.js      # Day/evening toggle with persistence
 data/
   products.json         # Catalogue incl. stitch + hook fields (edit this to change the shop)
+assets/
+  img/                  # Bundled crochet photography (one per product + hero/collage)
 wrangler.jsonc          # Cloudflare Workers static-assets config
 ```
 

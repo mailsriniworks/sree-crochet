@@ -158,11 +158,13 @@ button { font-family: inherit; color: inherit; }
   padding-bottom: 0;
 }
 
-/* giant vertical didone columns */
+/* giant vertical didone columns (the page h1) */
 .vtype {
   position: relative;
   display: flex; gap: 14px;
   padding: 10px 0 60px;
+  margin: 0;
+  font-weight: 400;
 }
 .vtype span {
   writing-mode: vertical-rl; transform: rotate(180deg);
@@ -179,9 +181,10 @@ button { font-family: inherit; color: inherit; }
 
 .vnote {
   writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--sans);
   font-size: 0.6rem; font-weight: 600;
   letter-spacing: 0.3em; color: var(--muted);
-  align-self: start; margin-top: 8px;
+  align-self: flex-start; margin-top: 8px;
 }
 
 /* middle column */
