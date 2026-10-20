@@ -1,4 +1,4 @@
-// js/components/productCard.js — editorial product card + shared constants.
+// js/components/productCard.js — tall editorial card + shared constants.
 import { escapeHtml, formatPrice, artStyle } from '../utils.js';
 import { state } from '../store.js';
 
@@ -21,8 +21,8 @@ export function iconFor(category) {
 }
 
 /**
- * Editorial card: natural-dye art block with stitch label, wishlist heart,
- * one-tap add-to-basket, then name/price/material under it.
+ * Tall editorial card: natural-dye art with hover overlay (stitch + quick-add),
+ * wishlist heart, then an under-row of round open button, name, price pill.
  */
 export function productCardHtml(product, index = 0) {
   const delay = Math.min(index, 12) * 40;
@@ -34,19 +34,23 @@ export function productCardHtml(product, index = 0) {
              role="button" tabindex="0"
              aria-label="View details for ${escapeHtml(product.title)}, ${formatPrice(product.price)}">
       <div class="p-media" style="${artStyle(product.id)}">
+        ${product.featured ? '<span class="p-badge">On the hook</span>' : ''}
         <button class="heart-btn ${fav ? 'is-fav' : ''}" data-fav-id="${escapeHtml(product.id)}"
                 aria-pressed="${fav}"
                 aria-label="Save ${escapeHtml(product.title)} to wishlist">${HEART_SVG}</button>
-        <span class="p-stitch">${escapeHtml(product.stitch ?? 'Hand crochet')}</span>
-        <button class="add-btn" data-add-id="${escapeHtml(product.id)}"
-                aria-label="Add ${escapeHtml(product.title)} to basket">+</button>
-      </div>
-      <div class="p-info">
-        <div class="p-row">
-          <h3 class="p-name">${escapeHtml(product.title)}</h3>
-          <span class="p-price">${formatPrice(product.price)}</span>
+        <div class="p-hover">
+          <span class="p-hover-stitch">${escapeHtml(product.stitch ?? 'Hand crochet')}<br />${escapeHtml(product.material)}</span>
+          <button class="add-btn" data-add-id="${escapeHtml(product.id)}"
+                  aria-label="Add ${escapeHtml(product.title)} to basket">+</button>
         </div>
-        <p class="p-meta">${escapeHtml(product.material)} · <span class="star">★</span> ${product.rating ?? '4.8'} · ${product.timeHours}h by hand</p>
+      </div>
+      <div class="p-under">
+        <span class="open-round" aria-hidden="true">↗</span>
+        <span class="p-under-copy">
+          <strong>${escapeHtml(product.title)}</strong>
+          <small>${escapeHtml(product.stitch ?? 'Hand crochet')} · <span class="star">★</span> ${product.rating ?? '4.8'}</small>
+        </span>
+        <span class="price-pill">${formatPrice(product.price)}</span>
       </div>
     </article>
   `;

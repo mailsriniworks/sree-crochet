@@ -1,7 +1,7 @@
 # Sree Crochet — AI Coding Instructions
 
 ## Project Overview
-An original, dependency-free static **shop** for handmade crochet (clothing, home goods, accessories). Design identity is its own: editorial artisan brand — linen paper, espresso ink, clay accent, Fraunces serif, crochet-scallop dividers, natural-dye gradient art. Two jobs: showcase the craft (stitch/hook/hours per piece, maker process) and help visitors buy (quick-add, basket drawer, checkout, wishlist). Pure client-side ES modules; Cloudflare Workers static deploy. **Never clone reference screenshots into this design — they are quality benchmarks, not templates.**
+An original, dependency-free static **shop** for handmade crochet (clothing, home goods, accessories). Design identity: sage-meadow canvas, deep forest ink, chartreuse/lime accent, cream surfaces, coral hearts, Instrument Serif display + Inter body, four-petal knot motif (SVG data-URI pattern bands). Tall editorial product cards with round open button + price pill under each. Two jobs: showcase the craft (stitch/hook/hours per piece, maker process) and help visitors buy (quick-add, basket drawer, checkout, wishlist). Pure client-side ES modules; Cloudflare Workers static deploy. **Reference screenshots are mood/quality benchmarks only — never clone them.**
 
 ## Architecture
 
@@ -47,10 +47,10 @@ wrangler.jsonc              # name: sree-crochet, assets: ./
 - Cart badge `#cartCount` hides at 0; `#cartCountLabel` mirrors count in the drawer head.
 
 ### Visual System
-- Tokens in `styles.css`: `--paper/--paper-2/--card/--ink/--muted/--clay/--clay-deep/--sage/--gold/--line`; evening theme via `[data-theme='dark']`.
+- Tokens in `styles.css`: `--canvas/--forest/--forest-2/--moss/--lime/--lime-deep/--cream/--cream-2/--love/--gold/--ink/--muted/--line`; night-garden theme via `[data-theme='dark']`. Motif patterns live in `--motif` / `--motif-soft` (four-petal knot SVG data-URIs) used by `.band`, `.look-c`, `.join-card`.
+- Brand edge = the motif band (`.band`) and the floating pill header (`.topbar-row` on cream); the maker + footer sit on `--forest-2` full-bleed bands with rounded top corners.
 - Product art: `artStyle(seed)` hashes id into six natural-dye palettes (oat/clay, sage/moss, madder, indigo, marigold, logwood) → inline `background:` string; `artForCategory()` fixed per category. Used by cards, drawer hero, cart thumbs, related tiles.
-- Scallop dividers (`.scallop`, `.scallop--flip`) are the brand edge; keep them between hero/categories and around `.maker`.
-- Easing standard `cubic-bezier(0.22, 1, 0.36, 1)`; reveals via `.reveal`/`.is-visible` (scrollFx).
+- Featured rail: `sections.js` renders featured pieces into `#railRow` only when its data signature changes (ids + favorites), so scroll position survives re-renders; `ui.js` wires `#railPrev/#railNext` (scrollBy one card+gap) and updates `#railCounter` on scroll.
 
 ### Data Format (`data/products.json`)
 `id`, `title`, `category` (`clothing|home|accessories`), `price`, optional `rating` (default 4.8), `stitch`, `hook`, `material`, `timeHours`, optional `featured`, `description`, optional `care`, `tags[]`.

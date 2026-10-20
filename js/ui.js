@@ -195,6 +195,18 @@ export function setupUI(dom) {
     }
   });
 
+  // ---- Featured rail: scroll controls + position counter ----
+  const rail = dom.railRow;
+  const railStepPx = () => (rail.querySelector('.p-card')?.offsetWidth ?? 252) + 18;
+  const railGo = (dir) => rail.scrollBy({ left: dir * railStepPx(), behavior: REDUCED ? 'auto' : 'smooth' });
+  dom.railPrev.addEventListener('click', () => railGo(-1));
+  dom.railNext.addEventListener('click', () => railGo(1));
+  rail.addEventListener('scroll', () => {
+    const total = rail.children.length || 1;
+    const idx = Math.min(total, Math.max(1, Math.round(rail.scrollLeft / railStepPx()) + 1));
+    dom.railCounter.textContent = `${idx} / ${total}`;
+  }, { passive: true });
+
   // ---- Newsletter ----
   dom.newsletter.addEventListener('submit', (e) => {
     e.preventDefault();

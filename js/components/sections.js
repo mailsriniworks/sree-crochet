@@ -1,6 +1,11 @@
-// js/components/sections.js — fills hero stats, category counts, maker stats.
+// js/components/sections.js — hero stats, category counts, maker stats,
+// and the featured rail (rendered once per data signature, so scrolling
+// and state changes don't reset its position).
 import { state } from '../store.js';
 import { qsa } from '../utils.js';
+import { productCardHtml } from './productCard.js';
+
+let lastRailSig = null;
 
 export function renderSections(dom) {
   const counts = { clothing: 0, home: 0, accessories: 0 };
@@ -20,4 +25,13 @@ export function renderSections(dom) {
   }
   if (dom.statPieces) dom.statPieces.textContent = String(state.products.length);
   if (dom.statHours) dom.statHours.textContent = `${hours}+`;
+
+  // ---- featured rail ----
+  const featured = state.products.filter((p) => p.featured);
+  const sig = featured.map((p) => p.id).join(',') + '|' + state.favorites.join(',');
+  if (dom.railRow && sig !== lastRailSig) {
+    lastRailSig = sig;
+    dom.railRow.innerHTML = featured.map((p, i) => productCardHtml(p, i)).join('');
+    if (dom.railCounter) dom.railCounter.textContent = `1 / ${featured.length || 0}`;
+  }
 }

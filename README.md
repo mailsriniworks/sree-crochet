@@ -1,6 +1,6 @@
 # ❋ Sree Crochet — Handmade, Stitch by Stitch
 
-An original, dependency-free static **shop** for handmade crochet: clothing, home goods, and accessories — designed as an editorial artisan brand, not a template. Warm linen paper, espresso ink, a clay accent, Fraunces display serif, crochet-scallop dividers, and natural-dye gradient artwork standing in for photography.
+An original, dependency-free static **shop** for handmade crochet: clothing, home goods, and accessories — designed as an artisan brand with its own identity: a sage-meadow canvas, deep forest ink, a chartreuse pop, cream surfaces, Instrument Serif display type, and a four-petal knot motif woven through bands and tiles. Natural-dye gradient artwork stands in for photography.
 
 The site does two jobs and does them well: **showcase the craft** (stitch patterns, hook sizes, hours by hand, the maker's process) and **help visitors buy** (one-tap add-to-basket, quantity steppers, a basket drawer with free-shipping progress and checkout, wishlist, search/filter/sort).
 
@@ -17,9 +17,9 @@ No framework, no bundler, no build step — ES modules served as static assets.
 - Live basket badge, toasts for every cart/wishlist action, result line with made-to-order shipping note
 
 ### Craft showcase
-- **Hero** with studio stats computed from the catalogue (designs, total hours by hand, fiber promise)
-- **The Maker** — sticky two-column section: founder quote + facts beside a four-step process timeline (design & swatch → choose the yarn → stitch by stitch → block, finish, send)
-- **Craft promises** — natural fibers, made to order, free shipping over $75, repairs for life
+- **Featured rail** — "On the hook this week" horizontal snap-scroll rail of featured pieces with ← → controls and a live 1/N counter
+- **Hero** with studio stats computed from the catalogue (designs, total hours by hand, fiber promise) and a layered lookbook collage
+- **The Maker** — forest-green band: founder quote + facts beside a four-step process timeline (design & swatch → choose the yarn → stitch by stitch → block, finish, send)
 - **Verified-buyer testimonial band** and a studio newsletter card
 - Every product carries its real **stitch pattern and hook size** in `data/products.json`
 
@@ -33,7 +33,7 @@ No framework, no bundler, no build step — ES modules served as static assets.
 
 ```
 index.html              # Editorial layout: header, hero, categories, collection, maker, craft, voices, join, drawers
-styles.css              # Original design system: linen/clay tokens, scallops, cards, drawers, themes
+styles.css              # Design system: meadow/forest/lime/cream tokens, motif bands, cards, drawers, themes
 js/
   main.js               # Bootstrap: dom refs, theme, UI wiring, scroll fx, catalogue load
   ui.js                 # All event wiring: search, filters, cart, drawers, checkout, toasts
