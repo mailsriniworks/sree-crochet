@@ -200,14 +200,18 @@
   <div class="backdrop" id="drawerBackdrop" aria-hidden="true"></div>
 
   <aside class="drawer" id="detailPanel" role="dialog" aria-modal="true" aria-label="Product details" aria-hidden="true">
-    <button class="drawer-close" id="closePanel" aria-label="Close details">×</button>
+    <button class="drawer-close" id="closePanel" aria-label="Close details">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
     <div id="panelContent"></div>
   </aside>
 
   <aside class="drawer drawer--cart" id="cartPanel" role="dialog" aria-modal="true" aria-label="Your basket" aria-hidden="true">
     <header class="cart-head">
       <h2>Your basket <span id="cartCountLabel" class="muted"></span></h2>
-      <button class="drawer-close drawer-close--static" id="closeCart" aria-label="Close basket">×</button>
+      <button class="drawer-close drawer-close--static" id="closeCart" aria-label="Close basket">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
     </header>
     <div id="cartContent"></div>
   </aside>
