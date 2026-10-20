@@ -50,12 +50,16 @@ export function setupUI(dom) {
   const onSearch = debounce((value) => setState({ search: value }), 180);
   dom.search.addEventListener('input', (e) => onSearch(e.target.value));
 
-  // ---- Category controls (chips + big category cards) ----
+  // ---- Category controls (stage nav + toolbar links) ----
   qsa('[data-category-chip]').forEach((el) => {
     el.addEventListener('click', () => {
       setState({ category: el.dataset.categoryChip, favOnly: false });
-      if (el.classList.contains('cat-card')) {
-        dom.gallery.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+      // The top nav filters a grid that sits below the fold — bring the
+      // collection into view so the menu visibly does something.
+      if (el.closest('.stage-nav') || el.classList.contains('cat-card')) {
+        document.getElementById('collection')?.scrollIntoView({
+          behavior: REDUCED ? 'auto' : 'smooth', block: 'start',
+        });
       }
     });
   });

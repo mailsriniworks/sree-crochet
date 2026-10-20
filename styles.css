@@ -91,7 +91,7 @@ button { font-family: inherit; color: inherit; }
 .wordmark {
   position: absolute; left: 30px; top: 30px;
   writing-mode: vertical-rl; transform: rotate(180deg);
-  font-family: var(--didone); font-size: 1.05rem; letter-spacing: 0.06em;
+  font-family: var(--didone); font-size: 1.55rem; letter-spacing: 0.05em;
 }
 .wm-dot { color: var(--yellow); font-size: 0.7rem; margin-top: 6px; }
 
