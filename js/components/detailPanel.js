@@ -19,7 +19,7 @@ export function renderDetailPanel(panel, content) {
 
   content.innerHTML = `
     <div class="panel-hero" style="${artStyle(product.id)}" aria-hidden="true">
-      <span class="panel-glyph">${iconFor(product.category)}</span>
+      ${product.image ? `<img class="panel-img" src="${escapeHtml(product.image)}" alt="" loading="lazy" onerror="this.remove()" />` : ''}
     </div>
     <div class="panel-body">
       <span class="panel-cat">${escapeHtml(label)} · made to order</span>
@@ -81,7 +81,7 @@ function relatedHtml(current) {
             (r) => `
           <button class="related-item" data-product-id="${escapeHtml(r.id)}"
                   aria-label="View ${escapeHtml(r.title)}">
-            <span class="related-visual" style="${artStyle(r.id)}" aria-hidden="true"></span>
+            <span class="related-visual" style="${artStyle(r.id)}" aria-hidden="true">${r.image ? `<img src="${escapeHtml(r.image)}" alt="" loading="lazy" onerror="this.remove()" />` : ''}</span>
             <span class="related-name">${escapeHtml(r.title)}</span>
             <span class="related-price">${formatPrice(r.price)}</span>
           </button>`

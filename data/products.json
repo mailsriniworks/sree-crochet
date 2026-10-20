@@ -5,14 +5,20 @@
     "category": "clothing",
     "price": 145,
     "rating": 4.9,
-    "stitch": "Aran cables & 2×2 rib",
+    "stitch": "Aran cables & 2\u00d72 rib",
     "hook": "5.0 mm",
     "material": "Merino wool",
     "timeHours": 40,
     "featured": true,
     "description": "A relaxed-fit cardigan worked in classic cable panels with deep pockets and hand-carved wooden buttons. Perfect for layering through crisp mornings and cool evenings.",
     "care": "Hand wash cold, dry flat",
-    "tags": ["cardigan", "cables", "wool", "layering"]
+    "tags": [
+      "cardigan",
+      "cables",
+      "wool",
+      "layering"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Simple_sweater_dress_with_with_turtleneck_-_pose_1.jpg/1920px-Simple_sweater_dress_with_with_turtleneck_-_pose_1.jpg"
   },
   {
     "id": "crochet-pullover-02",
@@ -27,7 +33,13 @@
     "featured": true,
     "description": "Thirty-six hand-joined granny squares in a warm meadow palette. Each square is stitched individually, then blocked and seamed for a soft, breathable everyday sweater.",
     "care": "Machine wash gentle, dry flat",
-    "tags": ["pullover", "granny square", "boho", "cotton"]
+    "tags": [
+      "pullover",
+      "granny square",
+      "boho",
+      "cotton"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Simple_sweater_dress_with_with_turtleneck_-_pose_2.jpg/1920px-Simple_sweater_dress_with_with_turtleneck_-_pose_2.jpg"
   },
   {
     "id": "crochet-top-03",
@@ -41,7 +53,13 @@
     "timeHours": 14,
     "description": "A breezy summer halter with an open lace stitch along the hem and adjustable tie straps. Made for beach days and warm-weather layering.",
     "care": "Hand wash cold, line dry",
-    "tags": ["halter", "summer", "lace", "linen"]
+    "tags": [
+      "halter",
+      "summer",
+      "lace",
+      "linen"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_3.jpg/1920px-Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_3.jpg"
   },
   {
     "id": "crochet-shawl-04",
@@ -53,9 +71,15 @@
     "hook": "4.5 mm",
     "material": "Mohair-silk blend",
     "timeHours": 26,
-    "description": "A featherweight triangular shawl that fades from amber to rose. Gossamer-soft mohair makes it drape like a whisper — elegant over anything.",
+    "description": "A featherweight triangular shawl that fades from amber to rose. Gossamer-soft mohair makes it drape like a whisper \u2014 elegant over anything.",
     "care": "Hand wash cold, block to dry",
-    "tags": ["shawl", "gradient", "elegant", "lightweight"]
+    "tags": [
+      "shawl",
+      "gradient",
+      "elegant",
+      "lightweight"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_4.jpg/1920px-Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_4.jpg"
   },
   {
     "id": "crochet-vest-05",
@@ -69,7 +93,13 @@
     "timeHours": 22,
     "description": "A sleeveless vest in deep forest tones with a basketweave texture and ribbed trim. A cozy layer that works over shirts or dresses.",
     "care": "Hand wash cold, dry flat",
-    "tags": ["vest", "texture", "unisex", "fall"]
+    "tags": [
+      "vest",
+      "texture",
+      "unisex",
+      "fall"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Blanket_of_natural_dyed_yarn.jpg/1920px-Blanket_of_natural_dyed_yarn.jpg"
   },
   {
     "id": "crochet-throw-06",
@@ -84,7 +114,13 @@
     "featured": true,
     "description": "An oversized throw in super-bulky yarn with hand-tied fringe. Weighty, warm, and made for long evenings by the fire.",
     "care": "Spot clean or dry clean",
-    "tags": ["throw", "blanket", "chunky", "cozy"]
+    "tags": [
+      "throw",
+      "blanket",
+      "chunky",
+      "cozy"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Blue%2C_pink%2C_white%2C_purple_crochet_blanket_2.jpg/1920px-Blue%2C_pink%2C_white%2C_purple_crochet_blanket_2.jpg"
   },
   {
     "id": "crochet-pillow-07",
@@ -98,7 +134,13 @@
     "timeHours": 10,
     "description": "Vibrant granny squares pieced into a textured pillow cover with a hidden back closure. Includes a hypoallergenic insert.",
     "care": "Remove insert, machine wash gentle",
-    "tags": ["pillow", "decor", "granny square", "boho"]
+    "tags": [
+      "pillow",
+      "decor",
+      "granny square",
+      "boho"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Brown%2C_pink%2C_purple_crochet_blanket.jpg/1920px-Brown%2C_pink%2C_purple_crochet_blanket.jpg"
   },
   {
     "id": "crochet-runner-08",
@@ -110,9 +152,15 @@
     "hook": "2.5 mm",
     "material": "Mercerized cotton",
     "timeHours": 18,
-    "description": "A vintage-inspired pineapple lace runner with scalloped edges — an heirloom-in-the-making for dining tables and sideboards.",
+    "description": "A vintage-inspired pineapple lace runner with scalloped edges \u2014 an heirloom-in-the-making for dining tables and sideboards.",
     "care": "Hand wash, starch and block if desired",
-    "tags": ["table runner", "lace", "vintage", "pineapple"]
+    "tags": [
+      "table runner",
+      "lace",
+      "vintage",
+      "pineapple"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Table-cloth_2008-1.jpg/1920px-Table-cloth_2008-1.jpg"
   },
   {
     "id": "crochet-basket-09",
@@ -124,9 +172,15 @@
     "hook": "6.0 mm",
     "material": "Jumbo cotton cord",
     "timeHours": 8,
-    "description": "Three nested baskets in natural, oat, and clay tones. Sturdy enough for blankets, toys, or plant pots — soft enough to fold flat.",
+    "description": "Three nested baskets in natural, oat, and clay tones. Sturdy enough for blankets, toys, or plant pots \u2014 soft enough to fold flat.",
     "care": "Spot clean, reshape while damp",
-    "tags": ["basket", "storage", "organization", "set"]
+    "tags": [
+      "basket",
+      "storage",
+      "organization",
+      "set"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Filet_crochet_sofa_blanket.jpg/1920px-Filet_crochet_sofa_blanket.jpg"
   },
   {
     "id": "crochet-garland-10",
@@ -140,7 +194,13 @@
     "timeHours": 7,
     "description": "Ten hand-stitched pennants in an earthy palette, strung on braided cotton cord. Instant warmth for nurseries, mantels, and celebrations.",
     "care": "Hand wash cold, dry flat",
-    "tags": ["garland", "bunting", "decor", "nursery"]
+    "tags": [
+      "garland",
+      "bunting",
+      "decor",
+      "nursery"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Christmas_Crochet_at_Greenock_pillarbox_11.jpg/1920px-Christmas_Crochet_at_Greenock_pillarbox_11.jpg"
   },
   {
     "id": "crochet-coasters-11",
@@ -154,7 +214,13 @@
     "timeHours": 4,
     "description": "Thick, absorbent coasters in marbled sage and cream. Weighted stitch pattern keeps them flat and durable through daily use.",
     "care": "Machine wash, tumble dry low",
-    "tags": ["coasters", "kitchen", "set", "recycled"]
+    "tags": [
+      "coasters",
+      "kitchen",
+      "set",
+      "recycled"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Crochet_blanket_in_progress_close-up.jpg/1920px-Crochet_blanket_in_progress_close-up.jpg"
   },
   {
     "id": "crochet-beanie-12",
@@ -162,14 +228,20 @@
     "category": "accessories",
     "price": 45,
     "rating": 4.9,
-    "stitch": "Folded 1×1 rib brim",
+    "stitch": "Folded 1\u00d71 rib brim",
     "hook": "5.0 mm",
     "material": "Alpaca blend",
     "timeHours": 8,
     "featured": true,
     "description": "A softly slouchy beanie in brushed alpaca with a folded ribbed brim and a faux-fur pom. Warmth without bulk.",
     "care": "Hand wash cold, dry flat; detach pom",
-    "tags": ["beanie", "hat", "alpaca", "winter"]
+    "tags": [
+      "beanie",
+      "hat",
+      "alpaca",
+      "winter"
+    ],
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/82/Crochet_hat_%2810696418025%29.jpg"
   },
   {
     "id": "crochet-tote-13",
@@ -183,7 +255,13 @@
     "timeHours": 12,
     "description": "A structured, breathable tote with reinforced handles and a flat base that stands on its own. Carries a full market haul with room to spare.",
     "care": "Hand wash cold, air dry",
-    "tags": ["tote", "bag", "market", "sustainable"]
+    "tags": [
+      "tote",
+      "bag",
+      "market",
+      "sustainable"
+    ],
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Crochet_bag.jpg"
   },
   {
     "id": "crochet-gloves-14",
@@ -197,7 +275,13 @@
     "timeHours": 6,
     "description": "Delicate lace along the back of the hand, snug ribbing at the wrist. Keep your hands warm while your fingers stay free for phones, pages, and coffee cups.",
     "care": "Hand wash cold, dry flat",
-    "tags": ["gloves", "lace", "fingerless", "gift"]
+    "tags": [
+      "gloves",
+      "lace",
+      "fingerless",
+      "gift"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_2.jpg/1920px-Dark_and_light_blue%2C_purple%2C_beige%2C_white_crochet_scarf_2.jpg"
   },
   {
     "id": "crochet-scarf-15",
@@ -211,7 +295,13 @@
     "timeHours": 15,
     "description": "A lofty infinity scarf in textured herringbone stitch, long enough for a generous double wrap. The kind of piece that becomes a signature.",
     "care": "Hand wash cold, dry flat",
-    "tags": ["scarf", "infinity", "herringbone", "wool"]
+    "tags": [
+      "scarf",
+      "infinity",
+      "herringbone",
+      "wool"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Crochet_scarf_in_two_shades_of_blue.jpg/1920px-Crochet_scarf_in_two_shades_of_blue.jpg"
   },
   {
     "id": "crochet-hairclips-16",
@@ -225,7 +315,13 @@
     "timeHours": 3,
     "description": "A pair of tiny hand-stitched daisy clips on nickel-free snap bases. A little meadow for your morning routine.",
     "care": "Spot clean only",
-    "tags": ["hair", "clips", "daisy", "set"]
+    "tags": [
+      "hair",
+      "clips",
+      "daisy",
+      "set"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Amigurumi_Cactus.jpg/1920px-Amigurumi_Cactus.jpg"
   },
   {
     "id": "crochet-keychain-17",
@@ -239,7 +335,13 @@
     "timeHours": 2,
     "description": "A cheerful braided tassel keychain on a sturdy brass ring. Perfect as a gift topper or a bright spot on your bag.",
     "care": "Spot clean only",
-    "tags": ["keychain", "tassel", "gift", "rainbow"]
+    "tags": [
+      "keychain",
+      "tassel",
+      "gift",
+      "rainbow"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Amigurumi_Chick.jpg/1920px-Amigurumi_Chick.jpg"
   },
   {
     "id": "crochet-earrings-18",
@@ -251,8 +353,14 @@
     "hook": "1.5 mm",
     "material": "Cotton thread",
     "timeHours": 4,
-    "description": "Miniature crocheted hoops over hypoallergenic wires — dramatic enough to notice, light enough to forget you're wearing them.",
+    "description": "Miniature crocheted hoops over hypoallergenic wires \u2014 dramatic enough to notice, light enough to forget you're wearing them.",
     "care": "Keep dry; store flat",
-    "tags": ["earrings", "jewelry", "hoops", "lightweight"]
+    "tags": [
+      "earrings",
+      "jewelry",
+      "hoops",
+      "lightweight"
+    ],
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Crochet_Blanket_Stitch.jpg/1920px-Crochet_Blanket_Stitch.jpg"
   }
 ]

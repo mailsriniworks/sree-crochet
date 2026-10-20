@@ -14,10 +14,10 @@ import { debounce, qsa, formatPrice } from './utils.js';
 const REDUCED = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
 const TITLES = {
-  all: 'Everything, hand-hooked',
-  clothing: 'Clothing, stitch by stitch',
-  home: 'Home goods with warmth built in',
-  accessories: 'Small pieces, daily joy',
+  all: 'The <em>Collection</em>',
+  clothing: 'The <em>Clothing</em> edit',
+  home: 'The <em>Home</em> edit',
+  accessories: 'The <em>Accessories</em> edit',
 };
 
 export function setupUI(dom) {
@@ -184,28 +184,28 @@ export function setupUI(dom) {
     }
   });
 
-  // ---- Keyboard: Enter/Space opens a focused card ----
-  dom.gallery.addEventListener('keydown', (e) => {
+  // ---- Keyboard: Enter/Space opens a focused card or the hero figure ----
+  document.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' && e.key !== ' ') return;
+    const fig = e.target.closest('#heroFig');
+    if (fig && e.target === fig && fig.dataset.productId) {
+      e.preventDefault();
+      dom.lastFocus = fig;
+      setState({ selectedId: fig.dataset.productId });
+      return;
+    }
     const card = e.target.closest('[data-product-id]');
-    if (card && e.target === card) {
+    if (card && dom.gallery.contains(card) && e.target === card) {
       e.preventDefault();
       dom.lastFocus = card;
       setState({ selectedId: card.dataset.productId });
     }
   });
 
-  // ---- Featured rail: scroll controls + position counter ----
-  const rail = dom.railRow;
-  const railStepPx = () => (rail.querySelector('.p-card')?.offsetWidth ?? 252) + 18;
-  const railGo = (dir) => rail.scrollBy({ left: dir * railStepPx(), behavior: REDUCED ? 'auto' : 'smooth' });
-  dom.railPrev.addEventListener('click', () => railGo(-1));
-  dom.railNext.addEventListener('click', () => railGo(1));
-  rail.addEventListener('scroll', () => {
-    const total = rail.children.length || 1;
-    const idx = Math.min(total, Math.max(1, Math.round(rail.scrollLeft / railStepPx()) + 1));
-    dom.railCounter.textContent = `${idx} / ${total}`;
-  }, { passive: true });
+  // ---- Hero cycle controls (breakout figure arrows) ----
+  const stepHero = (dir) => setState({ heroIndex: state.heroIndex + dir });
+  dom.heroNext?.addEventListener('click', (e) => { e.stopPropagation(); stepHero(1); });
+  dom.heroInsetBtn?.addEventListener('click', () => stepHero(1));
 
   // ---- Newsletter ----
   dom.newsletter.addEventListener('submit', (e) => {
@@ -230,9 +230,7 @@ export function setupUI(dom) {
   }
 
   function syncTitle() {
-    dom.collectionTitle.textContent = state.favOnly
-      ? 'Your saved pieces'
-      : TITLES[state.category] ?? TITLES.all;
+    dom.collectionTitle.innerHTML = state.favOnly ? 'Your <em>saved pieces</em>' : (TITLES[state.category] ?? TITLES.all);
   }
 
   function syncResultCount() {

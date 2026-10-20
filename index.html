@@ -4,110 +4,117 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Sree Crochet — handmade crochet clothing, home goods, and accessories. Stitched slowly in small batches from natural fibers. Made to order, made to last." />
-  <title>Sree Crochet — Handmade, Stitch by Stitch</title>
+  <title>Sree Crochet — Hand Made Wool</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#collection">Skip to shop</a>
 
-  <!-- ============ Floating pill header ============ -->
-  <header class="topbar">
-    <div class="container topbar-row">
-      <a class="brand" href="#top" id="top">
-        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true">
-          <circle cx="20" cy="13" r="6"/><circle cx="27" cy="20" r="6"/><circle cx="20" cy="27" r="6"/><circle cx="13" cy="20" r="6"/>
-        </svg>
-        Sree Crochet
-      </a>
+  <!-- ============ Editorial stage ============ -->
+  <div class="hero-wrap">
+    <section class="stage container-wide">
+      <span class="wordmark">Sree Crochet<span class="wm-dot" aria-hidden="true">●</span></span>
 
-      <nav class="pill-nav" aria-label="Browse categories">
-        <button class="chip" data-category-chip="all" aria-pressed="true">All</button>
-        <button class="chip" data-category-chip="clothing" aria-pressed="false">Clothing</button>
-        <button class="chip" data-category-chip="home" aria-pressed="false">Home Goods</button>
-        <button class="chip" data-category-chip="accessories" aria-pressed="false">Accessories</button>
-      </nav>
-
-      <div class="head-tools">
-        <label class="search-pill">
-          <span class="s-ico" aria-hidden="true">⌕</span>
-          <input id="search" type="search" placeholder="Search pieces…" aria-label="Search the collection" />
+      <header class="stage-head">
+        <label class="search-min">
+          <span aria-hidden="true">⌕</span>
+          <input id="search" type="search" placeholder="SEARCH" aria-label="Search the collection" />
         </label>
-        <button id="themeToggle" class="tool-btn" aria-label="Toggle theme">🌙</button>
-        <button id="cartBtn" class="tool-btn tool-btn--dark" aria-label="Open basket">
-          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 8h12l1.3 12.2a1 1 0 0 1-1 1.1H5.7a1 1 0 0 1-1-1.1L6 8z"></path>
-            <path d="M9 10V6a3 3 0 0 1 6 0v4"></path>
+
+        <nav class="stage-nav" aria-label="Browse categories">
+          <button class="navlink" data-category-chip="all" aria-pressed="true">All</button>
+          <button class="navlink" data-category-chip="clothing" aria-pressed="false">Clothing</button>
+          <button class="navlink" data-category-chip="home" aria-pressed="false">Home</button>
+          <button class="navlink" data-category-chip="accessories" aria-pressed="false">Accessories</button>
+        </nav>
+
+        <div class="stage-tools">
+          <button id="themeToggle" class="ghost-btn" aria-label="Toggle theme">🌙</button>
+          <button id="savedChip" class="ghost-btn" aria-pressed="false" aria-label="Show saved pieces">♥</button>
+          <button id="cartBtn" class="cart-btn" aria-label="Open basket">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 8h12l1.3 12.2a1 1 0 0 1-1 1.1H5.7a1 1 0 0 1-1-1.1L6 8z"></path>
+              <path d="M9 10V6a3 3 0 0 1 6 0v4"></path>
+            </svg>
+            <span id="cartCount" class="cart-badge" hidden>0</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="hero">
+        <!-- Giant vertical didone type -->
+        <div class="vtype" aria-label="Hand made wool">
+          <span>HAND</span>
+          <span>MADE</span>
+          <span>WOOL</span>
+          <i class="vtype-dot" aria-hidden="true"></i>
+        </div>
+        <span class="vnote">SREE CROCHET STUDIO — EST. 2021</span>
+
+        <!-- Middle editorial column -->
+        <div class="hero-mid">
+          <figure class="hero-inset">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Leftie_crochet.jpg/1920px-Leftie_crochet.jpg" alt="Hands working a crochet hook through warm-toned yarn" loading="lazy" />
+            <button id="heroInsetBtn" class="inset-arrow" aria-label="Next featured piece">↓</button>
+          </figure>
+          <div class="hero-buy">
+            <span class="price-tag" id="heroPrice">$—</span>
+            <span class="plus" aria-hidden="true">+</span>
+            <h2 class="hero-title" id="heroTitle">—</h2>
+          </div>
+          <p class="hero-desc" id="heroDesc">—</p>
+        </div>
+
+        <!-- Breakout figure -->
+        <figure class="hero-fig" id="heroFig" role="button" tabindex="0" aria-label="Open featured piece">
+          <img id="heroFigImg" src="" alt="" />
+          <button id="heroNext" class="fig-arrow" aria-label="Next featured piece">→</button>
+          <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="stampcircle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
+            <text><textPath href="#stampcircle">HAND HOOKED • SMALL BATCH • NATURAL FIBERS • SREE CROCHET •</textPath></text>
           </svg>
-          <span id="cartCount" class="cart-badge" hidden>0</span>
-        </button>
+        </figure>
       </div>
+    </section>
+  </div>
+
+  <!-- ============ Marquee ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Hand hooked in small batches</span><span>✳</span>
+      <span>Made to order</span><span>✳</span>
+      <span>Natural &amp; recycled fibers</span><span>✳</span>
+      <span>Repairs for life</span><span>✳</span>
+      <span>Free shipping over $75</span><span>✳</span>
+      <span>Hand hooked in small batches</span><span>✳</span>
+      <span>Made to order</span><span>✳</span>
+      <span>Natural &amp; recycled fibers</span><span>✳</span>
+      <span>Repairs for life</span><span>✳</span>
+      <span>Free shipping over $75</span><span>✳</span>
     </div>
-  </header>
+  </div>
 
   <main>
-    <!-- ============ Hero ============ -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">❋ Small batch · Made to order</p>
-          <h1>Wool, cotton &amp; time —<br /><em>hooked by hand.</em></h1>
-          <p class="lede">Sree Crochet is a one-woman studio making clothing, home goods, and accessories the slow way: natural fibers, counted stitches, and no two pieces exactly alike. Order yours and it goes on the hook this week.</p>
-          <div class="hero-cta">
-            <a class="btn btn-lime" href="#collection">Shop the collection</a>
-            <a class="btn btn-outline" href="#maker">How it's made</a>
-          </div>
-          <dl class="hero-stats" id="heroStats"></dl>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="look-tile look-a"><span class="look-glyph">🧶</span></div>
-          <div class="look-tile look-b"><span class="look-glyph">🪡</span></div>
-          <div class="look-tile look-c"></div>
-          <p class="look-chip"><span class="star">★</span> 4.9 · 212 happy homes</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Motif band ============ -->
-    <section class="container">
-      <div class="band">
-        <p>“Hand-hooked in small batches — made to order, made to last.”</p>
-      </div>
-    </section>
-
-    <!-- ============ Featured rail ============ -->
-    <section class="rail-sec container" aria-label="Featured this week">
-      <div class="rail-head">
-        <h2>On the hook this week</h2>
-        <div class="rail-ctl">
-          <button class="rail-btn" id="railPrev" aria-label="Scroll featured pieces left">←</button>
-          <span class="rail-count" id="railCounter">1 / 4</span>
-          <button class="rail-btn" id="railNext" aria-label="Scroll featured pieces right">→</button>
-        </div>
-      </div>
-      <div class="rail" id="railRow"></div>
-    </section>
-
     <!-- ============ Collection ============ -->
     <section class="collection container" id="collection" aria-label="The collection">
       <div class="section-head">
-        <h2 id="collectionTitle">Everything, hand-hooked</h2>
+        <h2 id="collectionTitle">The <em>Collection</em></h2>
         <div class="toolbar">
-          <div class="chips" role="group" aria-label="Filter by category">
-            <button class="chip" data-category-chip="all" aria-pressed="true">All</button>
-            <button class="chip" data-category-chip="clothing" aria-pressed="false">Clothing</button>
-            <button class="chip" data-category-chip="home" aria-pressed="false">Home</button>
-            <button class="chip" data-category-chip="accessories" aria-pressed="false">Accessories</button>
-            <button class="chip chip--heart" id="savedChip" aria-pressed="false">♥ Saved</button>
+          <div class="tlinks" role="group" aria-label="Filter by category">
+            <button class="tlink" data-category-chip="all" aria-pressed="true">All</button>
+            <button class="tlink" data-category-chip="clothing" aria-pressed="false">Clothing</button>
+            <button class="tlink" data-category-chip="home" aria-pressed="false">Home Goods</button>
+            <button class="tlink" data-category-chip="accessories" aria-pressed="false">Accessories</button>
           </div>
-          <select id="sort" class="sort-select" aria-label="Sort collection">
+          <select id="sort" class="sort-min" aria-label="Sort collection">
             <option value="featured">Featured</option>
-            <option value="price-asc">Price: low → high</option>
-            <option value="price-desc">Price: high → low</option>
-            <option value="name">Name A–Z</option>
+            <option value="price-asc">Price ↑</option>
+            <option value="price-desc">Price ↓</option>
+            <option value="name">A–Z</option>
           </select>
         </div>
       </div>
@@ -116,41 +123,46 @@
     </section>
 
     <!-- ============ Maker ============ -->
-    <section class="maker" id="maker">
-      <div class="container maker-grid">
+    <section class="maker container" id="maker">
+      <div class="maker-grid">
         <div>
-          <p class="eyebrow">❋ The maker</p>
-          <h2>One pair of hands,<br />every single stitch.</h2>
+          <p class="eyebrow">The maker</p>
+          <h2>One pair of hands, <em>every single stitch.</em></h2>
           <blockquote>“I count the hours in every piece because they're the point. When you hold a Sree Crochet throw, you're holding forty evenings of quiet work — and it will hold you back for years.”</blockquote>
           <p class="maker-sign">— Sree, founder &amp; sole maker</p>
           <div class="maker-facts">
             <div><strong id="statPieces">—</strong><span>designs in the shop</span></div>
             <div><strong id="statHours">—</strong><span>hours by hand</span></div>
-            <div><strong>100%</strong><span>natural or recycled fiber</span></div>
+            <div><strong>100%</strong><span>natural fiber</span></div>
           </div>
         </div>
-        <ol class="process">
-          <li class="reveal"><span class="step-no">01</span><div><h3>Design &amp; swatch</h3><p>Every piece starts as a pencil sketch and a gauge swatch. Stitch patterns are tested, frogged, and re-tested until the fabric drapes exactly right.</p></div></li>
-          <li class="reveal"><span class="step-no">02</span><div><h3>Choose the yarn</h3><p>Merino, alpaca, linen, organic and recycled cotton — bought in small dye lots from mills that name their farms. Colors chosen to age well, not trend well.</p></div></li>
-          <li class="reveal"><span class="step-no">03</span><div><h3>Stitch by stitch</h3><p>The slow part. Cables, granny squares, pineapple lace — each product page lists the exact stitch pattern and hook size, because craft deserves credit.</p></div></li>
-          <li class="reveal"><span class="step-no">04</span><div><h3>Block, finish, send</h3><p>Wet-blocked to shape, ends woven in by hand, wrapped in tissue and paper tape — never plastic — with a handwritten care card in every box.</p></div></li>
-        </ol>
+        <div class="collage" aria-hidden="true">
+          <img class="collage-a" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Crochet_blanket_in_progress.jpg/1920px-Crochet_blanket_in_progress.jpg" alt="" loading="lazy" />
+          <img class="collage-b" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Yarn_skeins.JPG/1920px-Yarn_skeins.JPG" alt="" loading="lazy" />
+        </div>
       </div>
+
+      <ol class="process">
+        <li class="reveal"><span class="step-no">01</span><div><h3>Design &amp; swatch</h3><p>Every piece starts as a pencil sketch and a gauge swatch. Stitch patterns are tested, frogged, and re-tested until the fabric drapes exactly right.</p></div></li>
+        <li class="reveal"><span class="step-no">02</span><div><h3>Choose the yarn</h3><p>Merino, alpaca, linen, organic and recycled cotton — bought in small dye lots from mills that name their farms. Colors chosen to age well, not trend well.</p></div></li>
+        <li class="reveal"><span class="step-no">03</span><div><h3>Stitch by stitch</h3><p>The slow part. Cables, granny squares, pineapple lace — each product page lists the exact stitch pattern and hook size, because craft deserves credit.</p></div></li>
+        <li class="reveal"><span class="step-no">04</span><div><h3>Block, finish, send</h3><p>Wet-blocked to shape, ends woven in by hand, wrapped in tissue and paper tape — never plastic — with a handwritten care card in every box.</p></div></li>
+      </ol>
     </section>
 
     <!-- ============ Craft promises ============ -->
     <section class="craft container" aria-label="Our craft promises">
-      <div class="craft-card reveal"><span class="craft-ico" aria-hidden="true">🌿</span><h3>Natural fibers only</h3><p>Wool, alpaca, linen, organic &amp; recycled cotton. If it can't biodegrade, it doesn't get hooked.</p></div>
-      <div class="craft-card reveal"><span class="craft-ico" aria-hidden="true">✋</span><h3>Made to order</h3><p>Nothing sits in a warehouse. Your piece begins when you order it — custom colors welcome.</p></div>
-      <div class="craft-card reveal"><span class="craft-ico" aria-hidden="true">📦</span><h3>Free shipping over $75</h3><p>Plastic-free packaging, tracked delivery, and a handwritten note tucked into every box.</p></div>
-      <div class="craft-card reveal"><span class="craft-ico" aria-hidden="true">🪡</span><h3>Repairs for life</h3><p>Snag a stitch in year five? Send it home. Re-blocking and mending are free, forever.</p></div>
+      <div class="craft-card reveal"><h3>Natural fibers only</h3><p>Wool, alpaca, linen, organic &amp; recycled cotton. If it can't biodegrade, it doesn't get hooked.</p></div>
+      <div class="craft-card reveal"><h3>Made to order</h3><p>Nothing sits in a warehouse. Your piece begins when you order it — custom colors welcome.</p></div>
+      <div class="craft-card reveal"><h3>Free shipping over $75</h3><p>Plastic-free packaging, tracked delivery, and a handwritten note tucked into every box.</p></div>
+      <div class="craft-card reveal"><h3>Repairs for life</h3><p>Snag a stitch in year five? Send it home. Re-blocking and mending are free, forever.</p></div>
     </section>
 
     <!-- ============ Voices ============ -->
     <section class="voices" id="voices">
       <div class="voices-inner reveal">
         <span class="stars" aria-label="Rated 5 out of 5">★★★★★</span>
-        <blockquote>“The throw is the coziest thing we own — you can feel the hours in every stitch. It arrived wrapped like a gift, with a card telling me exactly how it was blocked.”</blockquote>
+        <blockquote>“The throw is the coziest thing we own — you can feel the hours in every stitch.”</blockquote>
         <cite>— Priya M., verified buyer · Chunky Hearth Throw</cite>
       </div>
     </section>
@@ -160,11 +172,11 @@
       <div class="join-card">
         <div>
           <h2>First look at new drops</h2>
-          <p>One letter a month: new pieces, yarn stories, and the occasional pattern giveaway. No noise.</p>
+          <p>One letter a month: new pieces, yarn stories, and the occasional pattern giveaway.</p>
         </div>
         <form id="newsletter" class="join-form">
-          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
-          <button class="btn" type="submit">Join the list</button>
+          <input type="email" placeholder="YOUR EMAIL" aria-label="Email address" required />
+          <button class="btn-dark" type="submit">Join the list</button>
         </form>
       </div>
     </section>
@@ -172,12 +184,7 @@
 
   <footer class="site-foot">
     <div class="container foot-row">
-      <span class="brand">
-        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true">
-          <circle cx="20" cy="13" r="6"/><circle cx="27" cy="20" r="6"/><circle cx="20" cy="27" r="6"/><circle cx="13" cy="20" r="6"/>
-        </svg>
-        Sree Crochet
-      </span>
+      <span class="foot-brand">Sree Crochet<span aria-hidden="true">●</span></span>
       <p>Handmade in small batches · natural &amp; recycled fibers · repairs for life</p>
       <div class="foot-links">
         <a href="mailto:hello@example.com">Contact</a>

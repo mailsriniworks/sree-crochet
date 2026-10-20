@@ -25,6 +25,7 @@ export const state = {
   search: '',
   category: 'all',            // 'all' | 'clothing' | 'home' | 'accessories'
   sort: 'featured',
+  heroIndex: 0,               // featured piece shown in the breakout hero
   selectedId: null,           // product shown in the detail drawer
   cart: readJson(CART_KEY, []), // [{ id, qty }]
   cartOpen: false,

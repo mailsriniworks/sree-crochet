@@ -1,7 +1,7 @@
 # Sree Crochet — AI Coding Instructions
 
 ## Project Overview
-An original, dependency-free static **shop** for handmade crochet (clothing, home goods, accessories). Design identity: sage-meadow canvas, deep forest ink, chartreuse/lime accent, cream surfaces, coral hearts, Instrument Serif display + Inter body, four-petal knot motif (SVG data-URI pattern bands). Tall editorial product cards with round open button + price pill under each. Two jobs: showcase the craft (stitch/hook/hours per piece, maker process) and help visitors buy (quick-add, basket drawer, checkout, wishlist). Pure client-side ES modules; Cloudflare Workers static deploy. **Reference screenshots are mood/quality benchmarks only — never clone them.**
+An original, dependency-free static **shop** for handmade crochet (clothing, home goods, accessories). Design identity: fashion-editorial — warm grey backdrop, bone stage card, Bodoni Moda didone display (giant vertical columns, italic accents), Inter caps micro-type, single chrome-yellow accent, breakout hero photography, rotated price tag, spinning stamp, yellow marquee. **Real crochet photos** via `image` field (Wikimedia Commons URLs); `artStyle()` gradient remains as backdrop/fallback. Two jobs: showcase the craft (stitch/hook/hours, maker process) and help visitors buy (quick-add, basket drawer, checkout, wishlist). Pure client-side ES modules; Cloudflare Workers static deploy. **Reference screenshots are mood/quality benchmarks only — never clone them.**
 
 ## Architecture
 
@@ -25,7 +25,7 @@ js/
   components/
     productCard.js          # productCardHtml() + CATEGORY_LABELS/ICONS, HEART_SVG, iconFor()
     gallery.js              # renderGallery(root): grid + loading/empty/error (retry → dom.retry)
-    sections.js             # renderSections(dom): hero stats, [data-count], maker stats
+    sections.js             # renderSections(dom): maker stats + renderHero(dom) from state.heroIndex (featured cycle)
     cartDrawer.js           # renderCart(panel, content): lines, steppers, ship progress, totals, checkout
     detailPanel.js          # renderDetailPanel(panel, content): specs, qty stepper, add/buy-now, related
     toast.js                # initToast(el), toast(msg, icon)
@@ -47,8 +47,9 @@ wrangler.jsonc              # name: sree-crochet, assets: ./
 - Cart badge `#cartCount` hides at 0; `#cartCountLabel` mirrors count in the drawer head.
 
 ### Visual System
-- Tokens in `styles.css`: `--canvas/--forest/--forest-2/--moss/--lime/--lime-deep/--cream/--cream-2/--love/--gold/--ink/--muted/--line`; night-garden theme via `[data-theme='dark']`. Motif patterns live in `--motif` / `--motif-soft` (four-petal knot SVG data-URIs) used by `.band`, `.look-c`, `.join-card`.
-- Brand edge = the motif band (`.band`) and the floating pill header (`.topbar-row` on cream); the maker + footer sit on `--forest-2` full-bleed bands with rounded top corners.
+- Tokens in `styles.css`: `--outer/--bone/--bone-2/--ink/--muted/--yellow/--yellow-deep/--line`; gallery-at-night theme via `[data-theme='dark']`. Sharp editorial corners (no big radii except the stage card).
+- Hero: `.stage` bone card on `.hero-wrap` grey; `.hero-fig` uses negative bottom margin so the featured photo spills below the stage; `#heroNext` / `#heroInsetBtn` call `setState({heroIndex ± 1})`; `sections.renderHero` fills `#heroFigImg/#heroPrice/#heroTitle/#heroDesc` and sets `#heroFig[data-product-id]` so the figure opens the drawer (mouse + Enter/Space).
+- Product photos: `<img loading="lazy" onerror="this.remove()">` over `artStyle(id)` gradient in cards, drawer hero (`.panel-img`), cart thumbs, related tiles — if a photo 404s the gradient shows instead.
 - Product art: `artStyle(seed)` hashes id into six natural-dye palettes (oat/clay, sage/moss, madder, indigo, marigold, logwood) → inline `background:` string; `artForCategory()` fixed per category. Used by cards, drawer hero, cart thumbs, related tiles.
 - Featured rail: `sections.js` renders featured pieces into `#railRow` only when its data signature changes (ids + favorites), so scroll position survives re-renders; `ui.js` wires `#railPrev/#railNext` (scrollBy one card+gap) and updates `#railCounter` on scroll.
 

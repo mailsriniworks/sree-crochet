@@ -44,7 +44,7 @@ export function renderCart(panel, content) {
           if (!p) return '';
           return `
         <div class="cart-item">
-          <span class="cart-thumb" style="${artStyle(p.id)}" aria-hidden="true"></span>
+          <span class="cart-thumb" style="${artStyle(p.id)}" aria-hidden="true">${p.image ? `<img src="${escapeHtml(p.image)}" alt="" loading="lazy" onerror="this.remove()" />` : ''}</span>
           <div>
             <p class="cart-name">${escapeHtml(p.title)}</p>
             <p class="cart-stitch">${escapeHtml(p.stitch ?? p.material)}</p>

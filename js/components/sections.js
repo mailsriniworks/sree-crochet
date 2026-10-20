@@ -1,11 +1,7 @@
-// js/components/sections.js — hero stats, category counts, maker stats,
-// and the featured rail (rendered once per data signature, so scrolling
-// and state changes don't reset its position).
+// js/components/sections.js — live stats + the breakout hero.
+// The hero cycles through `featured` products via state.heroIndex.
 import { state } from '../store.js';
-import { qsa } from '../utils.js';
-import { productCardHtml } from './productCard.js';
-
-let lastRailSig = null;
+import { escapeHtml, formatPrice, qsa } from '../utils.js';
 
 export function renderSections(dom) {
   const counts = { clothing: 0, home: 0, accessories: 0 };
@@ -26,12 +22,25 @@ export function renderSections(dom) {
   if (dom.statPieces) dom.statPieces.textContent = String(state.products.length);
   if (dom.statHours) dom.statHours.textContent = `${hours}+`;
 
-  // ---- featured rail ----
+  renderHero(dom);
+}
+
+/** Fill the editorial hero (price tag, title, description, breakout photo). */
+function renderHero(dom) {
   const featured = state.products.filter((p) => p.featured);
-  const sig = featured.map((p) => p.id).join(',') + '|' + state.favorites.join(',');
-  if (dom.railRow && sig !== lastRailSig) {
-    lastRailSig = sig;
-    dom.railRow.innerHTML = featured.map((p, i) => productCardHtml(p, i)).join('');
-    if (dom.railCounter) dom.railCounter.textContent = `1 / ${featured.length || 0}`;
+  if (!featured.length || !dom.heroFig) return;
+
+  const len = featured.length;
+  const i = ((state.heroIndex % len) + len) % len;
+  const p = featured[i];
+
+  dom.heroFig.dataset.productId = p.id;
+  dom.heroFig.setAttribute('aria-label', `Open details for ${p.title}`);
+  if (dom.heroFigImg) {
+    dom.heroFigImg.src = p.image ?? '';
+    dom.heroFigImg.alt = `${p.title} — handmade crochet`;
   }
+  if (dom.heroPrice) dom.heroPrice.textContent = formatPrice(p.price);
+  if (dom.heroTitle) dom.heroTitle.textContent = p.title;
+  if (dom.heroDesc) dom.heroDesc.textContent = `${escapeHtml(p.stitch ?? 'Hand crochet')} with ${escapeHtml(p.material.toLowerCase())}. ${escapeHtml(p.description)}`;
 }

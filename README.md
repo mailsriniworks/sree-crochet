@@ -1,6 +1,6 @@
 # ❋ Sree Crochet — Handmade, Stitch by Stitch
 
-An original, dependency-free static **shop** for handmade crochet: clothing, home goods, and accessories — designed as an artisan brand with its own identity: a sage-meadow canvas, deep forest ink, a chartreuse pop, cream surfaces, Instrument Serif display type, and a four-petal knot motif woven through bands and tiles. Natural-dye gradient artwork stands in for photography.
+An original, dependency-free static **shop** for handmade crochet: clothing, home goods, and accessories — designed as a fashion-editorial brand: warm grey backdrop, bone stage card, high-contrast Bodoni didone type (including giant vertical "HAND MADE WOOL" columns), one chrome-yellow accent, **real crochet photography** (sourced from Wikimedia Commons) with a breakout hero image that spills past the stage, rotated price tag, spinning text stamp, and a yellow marquee band.
 
 The site does two jobs and does them well: **showcase the craft** (stitch patterns, hook sizes, hours by hand, the maker's process) and **help visitors buy** (one-tap add-to-basket, quantity steppers, a basket drawer with free-shipping progress and checkout, wishlist, search/filter/sort).
 
@@ -17,8 +17,10 @@ No framework, no bundler, no build step — ES modules served as static assets.
 - Live basket badge, toasts for every cart/wishlist action, result line with made-to-order shipping note
 
 ### Craft showcase
-- **Featured rail** — "On the hook this week" horizontal snap-scroll rail of featured pieces with ← → controls and a live 1/N counter
-- **Hero** with studio stats computed from the catalogue (designs, total hours by hand, fiber promise) and a layered lookbook collage
+- **Editorial hero stage** — rounded bone card on grey: vertical wordmark, caps nav, giant vertical didone columns with yellow dot, inset work-in-progress photo, rotated yellow price tag, breakout featured photo spilling below the stage with circular next-arrow and spinning stamp; arrows cycle the featured pieces
+- **Real photography** — every product carries a `image` URL (Wikimedia Commons crochet photos); gradient art remains as backdrop/fallback if a photo fails
+- **Yellow marquee band** with studio promises, pausing on hover
+- **Hero** with studio stats computed from the catalogue (designs, total hours by hand, fiber promise) in the maker section, plus a two-photo collage
 - **The Maker** — forest-green band: founder quote + facts beside a four-step process timeline (design & swatch → choose the yarn → stitch by stitch → block, finish, send)
 - **Verified-buyer testimonial band** and a studio newsletter card
 - Every product carries its real **stitch pattern and hook size** in `data/products.json`
@@ -44,7 +46,7 @@ js/
   components/
     productCard.js      # Editorial card: art block, stitch label, heart, quick-add, name/price
     gallery.js          # Grid rendering (loading / empty / error states)
-    sections.js         # Hero stats, category counts, maker stats from live data
+    sections.js         # renderSections(dom): maker/hero stats + breakout hero from state.heroIndex
     cartDrawer.js       # Basket drawer: lines, steppers, shipping progress, totals, checkout
     detailPanel.js      # Product drawer: specs, qty, add/buy-now, related row
     toast.js            # Toast notifications (aria-live root)
@@ -92,7 +94,7 @@ npx wrangler deploy           # production (required for live-site changes!)
 
 ## Roadmap
 
-- Swap natural-dye gradient art for real product photography (`artStyle()` → `background-image`)
+- Swap Commons photography for your own product shots (same `image` field; gradient art stays as fallback)
 - Real checkout (Stripe payment links per product would slot into `checkoutBtn`)
 - Size/color option selectors per product
 - CMS-backed catalogue for non-technical updates
