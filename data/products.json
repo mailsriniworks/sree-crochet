@@ -305,21 +305,21 @@
   },
   {
     "id": "crochet-hairclips-16",
-    "title": "Daisy Hair Clip Set",
+    "title": "Fern Bow Hair Clip",
     "category": "accessories",
-    "price": 18,
+    "price": 20,
     "rating": 4.8,
-    "stitch": "Micro daisy motif",
+    "stitch": "Tunisian crochet bow on snap base",
     "hook": "2.0 mm",
     "material": "Cotton yarn",
-    "timeHours": 3,
-    "description": "A pair of tiny hand-stitched daisy clips on nickel-free snap bases. A little meadow for your morning routine.",
+    "timeHours": 2,
+    "description": "A spring-green crocheted bow stitched over a no-slip metal snap. Light enough for fine hair, sturdy enough for every day.",
     "care": "Spot clean only",
     "tags": [
-      "hair",
-      "clips",
-      "daisy",
-      "set"
+      "hair clip",
+      "bow",
+      "green",
+      "gift"
     ],
     "image": "./assets/img/crochet-hairclips-16.jpg"
   },
@@ -362,5 +362,88 @@
       "lightweight"
     ],
     "image": "./assets/img/crochet-earrings-18.jpg"
+  },
+  {
+    "id": "crochet-brooch-21",
+    "title": "Poinsettia Bloom Brooch",
+    "category": "accessories",
+    "price": 26,
+    "rating": 4.9,
+    "stitch": "Cluster-petal motif, picot edging",
+    "hook": "3.0 mm",
+    "material": "Acrylic-wool blend",
+    "timeHours": 5,
+    "featured": true,
+    "description": "A festive layered bloom in berry red with a cream center and green accents \u2014 pin it to a coat, bag, or holiday sweater. Stitched in our studio, photographed on our worktable.",
+    "care": "Spot clean only; store flat",
+    "tags": [
+      "brooch",
+      "poinsettia",
+      "holiday",
+      "gift"
+    ],
+    "image": "./assets/img/crochet-brooch-21.jpg"
+  },
+  {
+    "id": "crochet-scrunchie-22",
+    "title": "Lime Ruffle Scrunchie",
+    "category": "accessories",
+    "price": 16,
+    "rating": 4.8,
+    "stitch": "Ruffle post-stitch band on elastic core",
+    "hook": "3.5 mm",
+    "material": "Cotton yarn",
+    "timeHours": 2,
+    "featured": true,
+    "description": "A high-shrunk lime ruffle that holds a ponytail without the crease. The textured post stitches give it volume that bounces back wash after wash.",
+    "care": "Hand wash cold, air dry",
+    "tags": [
+      "scrunchie",
+      "hair",
+      "lime",
+      "everyday"
+    ],
+    "image": "./assets/img/crochet-scrunchie-22.jpg"
+  },
+  {
+    "id": "crochet-persimmon-23",
+    "title": "Persimmon Fruit Charm",
+    "category": "accessories",
+    "price": 15,
+    "rating": 4.9,
+    "stitch": "Amigurumi sphere, magic ring",
+    "hook": "2.5 mm",
+    "material": "Cotton yarn",
+    "timeHours": 3,
+    "description": "A tiny persimmon with a real leaf stem \u2014 sweet on a keyring, bag zipper, or desk shelf. Stuffing is hypoallergenic and surface-washable.",
+    "care": "Spot clean only",
+    "tags": [
+      "charm",
+      "keychain",
+      "amigurumi",
+      "fruit"
+    ],
+    "image": "./assets/img/crochet-persimmon-23.jpg"
+  },
+  {
+    "id": "crochet-headband-24",
+    "title": "Lagoon & Berry Headband",
+    "category": "accessories",
+    "price": 24,
+    "rating": 4.7,
+    "stitch": "Half-double-crochet band, berry edging",
+    "hook": "4.0 mm",
+    "material": "Merino blend",
+    "timeHours": 4,
+    "featured": true,
+    "description": "A two-tone fitness headband in lagoon teal over berry red \u2014 the stitch gap lets it stretch to fit and snap back without slipping.",
+    "care": "Hand wash cold, dry flat",
+    "tags": [
+      "headband",
+      "teal",
+      "sport",
+      "merino"
+    ],
+    "image": "./assets/img/crochet-headband-24.jpg"
   }
 ]
