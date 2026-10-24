@@ -1,10 +1,11 @@
 // js/components/cartDrawer.js — the basket drawer: lines, qty steppers,
-// free-shipping progress, totals, checkout.
+// free-shipping progress, totals, and the marketplace order bridge.
 import { state, cartCount, cartSubtotal } from '../store.js';
 import { escapeHtml, formatPrice, artStyle } from '../utils.js';
+import { brandStoreUrl } from '../config.js';
 
-export const FREE_SHIPPING_AT = 75;
-const SHIP_COST = 6;
+export const FREE_SHIPPING_AT = 1499;
+export const SHIP_COST = 99;
 
 /** Render (or hide) the cart drawer based on state.cartOpen. */
 export function renderCart(panel, content) {
@@ -70,7 +71,9 @@ export function renderCart(panel, content) {
     </div>
 
     <div class="cart-actions">
-      <button class="btn btn-solid btn-block" id="checkoutBtn">Checkout · ${formatPrice(grand)}</button>
+      <button class="btn btn-solid btn-block" id="checkoutBtn">Order on Amazon.in · ${formatPrice(grand)} ↗</button>
+      <a class="btn btn-line btn-block" href="${brandStoreUrl('flipkart')}" target="_blank" rel="noopener">Choose on Flipkart ↗</a>
+      <button class="cart-remove" id="copySummaryBtn" style="justify-self:center">Copy order summary</button>
       <button class="cart-remove" id="clearCartBtn" style="justify-self:center">Clear basket</button>
     </div>
   `;

@@ -1,8 +1,9 @@
 // js/components/detailPanel.js — product drawer: full craft specs,
-// quantity stepper, add-to-basket / buy-now, related pieces.
+// quantity stepper, add-to-basket / marketplace buy, share, related pieces.
 import { state } from '../store.js';
 import { escapeHtml, formatPrice, artStyle } from '../utils.js';
 import { CATEGORY_LABELS, iconFor } from './productCard.js';
+import { STORE, marketplaceUrls } from '../config.js';
 
 /** Render (or close) the detail drawer based on state.selectedId. */
 export function renderDetailPanel(panel, content) {
@@ -16,6 +17,7 @@ export function renderDetailPanel(panel, content) {
   }
 
   const label = CATEGORY_LABELS[product.category] ?? product.category;
+  const urls = marketplaceUrls(product);
 
   content.innerHTML = `
     <div class="panel-hero" style="${artStyle(product.id)}" aria-hidden="true">
@@ -49,10 +51,14 @@ export function renderDetailPanel(panel, content) {
           <output id="detailQtyOut">1</output>
           <button data-qty-delta="1" aria-label="Increase quantity">+</button>
         </div>
-        <button class="btn btn-solid" id="addToCartBtn">Add to basket</button>
+      <button class="btn btn-solid" id="addToCartBtn">Add to basket</button>
       </div>
-      <button class="btn btn-line btn-block" id="buyNowBtn">Buy it now →</button>
-      <p class="muted panel-note">Ships in ~2 weeks · free over $75 · repairs for life · custom colors at checkout</p>
+      <div class="market-row">
+        <a class="btn btn-line btn-block" href="${urls.amazon}" target="_blank" rel="noopener">Buy on Amazon.in ↗</a>
+        <a class="btn btn-line btn-block" href="${urls.flipkart}" target="_blank" rel="noopener">Buy on Flipkart ↗</a>
+      </div>
+      <button class="btn btn-line btn-block" data-share-piece>Share this piece ↗</button>
+      <p class="muted panel-note">Ships in ~2 weeks · free shipping over ₹1,499 · repairs for life · <a class="custom-link" href="mailto:${STORE.email}?subject=${encodeURIComponent('Custom order: ' + product.title)}&body=${encodeURIComponent(`Hi Sree! Could I order the ${product.title} in a custom color?`)}">ask for a custom color</a></p>
 
       ${relatedHtml(product)}
     </div>

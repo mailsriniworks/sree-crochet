@@ -10,6 +10,8 @@ import { renderCart, FREE_SHIPPING_AT } from './components/cartDrawer.js';
 import { renderSections } from './components/sections.js';
 import { initToast, toast } from './components/toast.js';
 import { debounce, qsa, formatPrice } from './utils.js';
+import { brandStoreUrl } from './config.js';
+import { SHIP_COST } from './components/cartDrawer.js';
 
 const REDUCED = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
@@ -85,6 +87,26 @@ export function setupUI(dom) {
     if (e.key === 'Escape' && (state.cartOpen || state.selectedId)) closeAll();
   });
 
+  // ---- Order-summary helpers ----
+  function buildSummary() {
+    const lines = state.cart
+      .map((l) => {
+        const p = state.products.find((x) => x.id === l.id);
+        return p ? `${l.qty} × ${p.title} — ${formatPrice(p.price * l.qty)}` : null;
+      })
+      .filter(Boolean)
+      .join('\n');
+    const subtotal = cartSubtotal();
+    const shipping = subtotal >= FREE_SHIPPING_AT ? 0 : SHIP_COST;
+    return `Sree Crochet order:\n\n${lines}\n\nSubtotal: ${formatPrice(subtotal)}\nShipping: ${shipping ? formatPrice(shipping) : 'Free'}\nTotal: ${formatPrice(subtotal + shipping)}`;
+  }
+
+  function copyText(text) {
+    try {
+      navigator.clipboard?.writeText(text).catch(() => {});
+    } catch { /* older browsers: checkout still opens the store */ }
+  }
+
   // ---- Delegated commerce clicks ----
   document.addEventListener('click', (e) => {
     // wishlist heart
@@ -140,31 +162,31 @@ export function setupUI(dom) {
       return;
     }
 
-    // buy now: add, then straight to the basket
-    if (e.target.closest('#buyNowBtn')) {
-      const qtyNow = Number(dom.detailQtyOut()?.textContent ?? 1);
-      addToCart(state.selectedId, qtyNow);
-      setState({ selectedId: null, cartOpen: true });
+    // share this piece (Web Share API, clipboard fallback)
+    const share = e.target.closest('[data-share-piece]');
+    if (share) {
+      const p = state.products.find((x) => x.id === state.selectedId);
+      const text = `Check out “${p?.title ?? 'this piece'}” at Sree Crochet`;
+      if (navigator.share) {
+        navigator.share({ title: 'Sree Crochet', text, url: location.href }).catch(() => {});
+      } else {
+        copyText(`${text} — ${location.href}`);
+        toast('Link copied — paste it anywhere', '🔗');
+      }
       return;
     }
 
-    // checkout: draft the order by email (demo checkout)
+    // checkout bridge: copy the summary, open our Amazon store search
     if (e.target.closest('#checkoutBtn')) {
-      const lines = state.cart
-        .map((l) => {
-          const p = state.products.find((x) => x.id === l.id);
-          return p ? `${l.qty} × ${p.title} — ${formatPrice(p.price * l.qty)}` : null;
-        })
-        .filter(Boolean)
-        .join('\n');
-      const subtotal = cartSubtotal();
-      const shipping = subtotal >= FREE_SHIPPING_AT ? 0 : 6;
-      window.location.href = `mailto:hello@example.com?subject=${encodeURIComponent(
-        'New order — Sree Crochet'
-      )}&body=${encodeURIComponent(
-        `Hi Sree! I'd like to order:\n\n${lines}\n\nSubtotal: ${formatPrice(subtotal)}\nShipping: ${shipping ? formatPrice(shipping) : 'Free'}\nTotal: ${formatPrice(subtotal + shipping)}\n\n(Custom colors or notes: )`
-      )}`;
-      toast('Order summary opened in your mail app', '✉️');
+      copyText(buildSummary());
+      window.open(brandStoreUrl('amazon'), '_blank', 'noopener');
+      toast('Amazon store opened · order summary copied — paste it in the order note', '🛒');
+      return;
+    }
+
+    if (e.target.closest('#copySummaryBtn')) {
+      copyText(buildSummary());
+      toast('Order summary copied to clipboard', '📋');
       return;
     }
 

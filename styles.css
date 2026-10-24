@@ -555,6 +555,10 @@ body.drawer-open .backdrop { opacity: 1; pointer-events: auto; }
 .qty-stepper button:hover { background: var(--bone-2); }
 .qty-stepper output { min-width: 30px; text-align: center; font-weight: 600; font-size: 0.95rem; }
 .buy-row .btn-solid { flex: 1; }
+
+.market-row { display: grid; gap: 10px; margin: 10px 0; }
+.custom-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--yellow-deep); }
+.custom-link:hover { color: var(--moss); }
 .btn-solid {
   border: none; cursor: pointer;
   background: var(--yellow); color: var(--ink);
@@ -707,3 +711,34 @@ body.drawer-open .backdrop { opacity: 1; pointer-events: auto; }
   .reveal { opacity: 1; transform: none; }
   .marquee-track { animation: none; }
 }
+
+/* ============ Commission menu + urgency + voices wall ============ */
+.commission { padding: 26px 0 6px; }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+.menu-card {
+  background: var(--bone-2); border: 1px solid var(--line);
+  padding: 22px; display: grid; gap: 5px; align-content: start;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.menu-card:hover { transform: translateY(-4px); border-color: var(--ink); }
+.menu-card h3 { font-size: 1.15rem; }
+.menu-card p { margin: 0; font-size: 0.78rem; }
+.menu-price { margin-top: 6px; font-weight: 700; color: var(--moss); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.menu-note { margin: 16px 2px 0; font-size: 0.78rem; }
+
+.drop-band {
+  display: flex; gap: 12px; align-items: center; justify-content: center;
+  background: var(--yellow); color: var(--ink);
+  padding: 13px 26px; border-radius: 999px;
+  width: fit-content; margin: 6px auto 10px; box-shadow: var(--shadow);
+}
+.drop-band p { margin: 0; font-size: 0.8rem; letter-spacing: 0.06em; }
+.drop-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; transform: scale(0.8); } }
+
+.voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; margin-top: 8px; }
+.voices-grid blockquote { font-size: 1rem; line-height: 1.55; margin: 0; font-weight: 400; }
+.voices-grid cite { display: block; margin-top: 12px; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(22, 22, 26, 0.55); }
+[data-theme='dark'] .voices-grid cite { color: rgba(236, 232, 221, 0.55); }
+
+@media (max-width: 1020px) { .menu-grid, .voices-grid { grid-template-columns: 1fr; } }

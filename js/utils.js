@@ -10,11 +10,11 @@ export function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
-/** Format a number as USD currency. */
+/** Format a number as Indian rupees (en-IN locale, no decimals). */
 export function formatPrice(value) {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'INR',
     maximumFractionDigits: 0,
   }).format(value);
 }

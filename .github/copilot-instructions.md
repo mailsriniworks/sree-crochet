@@ -37,13 +37,13 @@ wrangler.jsonc              # name: sree-crochet, assets: ./
 ### Rendering Flow
 1. `main.js`: `initTheme` → `setupUI(dom)` → `initScrollFx(dom)` → `loadCatalogue()`.
 2. Single subscriber renders: gallery, product drawer, cart drawer, sections; then `syncChips/syncCartBadge/syncTitle/syncResultCount`; toggles `body.drawer-open` when either drawer is open; restores focus to `dom.lastFocus` when the product drawer closes.
-3. One delegated `document` click handler routes, in order: `[data-fav-id]` → wishlist+toast; `[data-add-id]` → addToCart+toast; `[data-qty-id]` → setCartQty(line.qty+delta); `[data-remove-id]` → setCartQty 0; `[data-qty-delta]` → DOM-only stepper (`output` in same `.qty-stepper`, clamp 1–9); `#addToCartBtn` → addToCart(selectedId, qty from `#detailQtyOut`); `#buyNowBtn` → add then `{selectedId:null, cartOpen:true}`; `#checkoutBtn` → mailto itemized order + toast; `#clearCartBtn` → clearCart; `#retryBtn` → `dom.retry()`; `[data-product-id]` → open product drawer.
+3. One delegated `document` click handler routes, in order: `[data-fav-id]` → wishlist+toast; `[data-add-id]` → addToCart+toast; `[data-qty-id]` → setCartQty(line.qty+delta); `[data-remove-id]` → setCartQty 0; `[data-qty-delta]` → DOM-only stepper (`output` in same `.qty-stepper`, clamp 1–9); `#addToCartBtn` → addToCart(selectedId, qty from `#detailQtyOut`); `[data-share-piece]` → navigator.share (clipboard fallback + toast); `#checkoutBtn` → copy buildSummary() + window.open(brandStoreUrl('amazon')) + toast; `#copySummaryBtn` → clipboard only; `#clearCartBtn` → clearCart; `#retryBtn` → `dom.retry()`; `[data-product-id]` → open product drawer.
 4. Drawers: `#cartBtn` opens cart (closes product); `#closeCart`/`#closePanel`/backdrop/Escape close both.
 5. Category controls share `data-category-chip` (chips + `.cat-card`); `.cat-card` click also scrolls to the grid. `#savedChip` toggles `favOnly`.
 
 ### Commerce Rules
-- Free shipping at $75 (`FREE_SHIPPING_AT` in cartDrawer.js), else $6; progress bar width = subtotal/75.
-- Checkout is a demo: builds an itemized `mailto:` order (lines, subtotal, shipping, total) — swap for Stripe payment links later without touching the cart model.
+- Prices are **INR whole rupees** (`formatPrice` uses Intl `en-IN`/`INR`, 0 decimals). Free shipping at ₹1,499 (`FREE_SHIPPING_AT` in cartDrawer.js), else ₹99 (`SHIP_COST`, exported for ui.js summary); progress bar width = subtotal/1499.
+- Checkout is a **marketplace bridge** (listings not live yet): `js/config.js` exports `STORE` (brand, email, `amazon`/`flipkart` search bases) and `marketplaceUrls(product)` — direct `product.amazon`/`product.flipkart` URLs win, else brand+title search. Cart `#checkoutBtn` copies the itemized summary to clipboard and opens the Amazon store search. When real listings exist, add `"amazon": "https://amazon.in/dp/…"` / `"flipkart": "…"` to that product in `data/products.json` — no code changes.
 - Cart badge `#cartCount` hides at 0; `#cartCountLabel` mirrors count in the drawer head.
 
 ### Visual System
@@ -67,7 +67,7 @@ wrangler.jsonc              # name: sree-crochet, assets: ./
 - **New product**: append to `data/products.json`; art, counts, stats, drawers update automatically.
 - **New category**: CATEGORY_LABELS/ICONS + CATEGORY_ART palette index + a `.cat-card`, chip, and nav entry; store filtering is generic.
 - **New sort**: `<option>` in `#sort` + comparator in `getVisibleProducts()`.
-- **Real checkout**: replace the `#checkoutBtn` mailto block with per-line Stripe payment links; cart model stays.
+- **Real checkout**: replace the marketplace-search bridge with direct listing URLs per product (optional `amazon`/`flipkart` fields — already supported by `marketplaceUrls()`); or Stripe links later; cart model stays.
 
 ## Testing & Debugging
 ```bash

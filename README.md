@@ -10,7 +10,10 @@ No framework, no bundler, no build step — ES modules served as static assets.
 
 ### Commerce
 - **One-tap add-to-basket** on every card (`+`), plus full **Add to basket / Buy it now** in the product drawer with a quantity stepper
-- **Basket drawer** — line items with art thumbnails, qty steppers, remove, free-shipping progress bar (free over $75), subtotal/shipping/total, checkout (drafts an itemized order email), clear basket; persisted in `localStorage`
+- **Basket drawer** — line items with photos, qty steppers, remove, free-shipping progress bar (free over ₹1,499, else ₹99), subtotal/shipping/total; persisted in `localStorage`
+- **Marketplace checkout bridge** — in-app checkout isn't live yet, so "Order on Amazon.in" / "Flipkart" buttons open your store search per product and copy an itemized order summary to the clipboard; swap in real listing URLs anytime via optional `amazon`/`flipkart` fields per product (`js/config.js` holds defaults)
+- **Commission menu** — six price tiers (from ₹249) with an "Ask Sree directly" mailto, plus a pulse urgency band ("2 made-to-order slots left this week")
+- **Prices in Indian rupees** — `formatPrice()` renders en-IN `₹`, whole numbers
 - **Product drawer** — stitch pattern, hook size, fiber, care, tags, rating, hours by hand, related pieces ("You may also like")
 - **Wishlist** — heart any piece, persisted; "♥ Saved" filter chip
 - **Search** (debounced, matches title/material/stitch/description/tags), **category chips + category cards**, **sort** (featured / price / name)
@@ -38,7 +41,8 @@ index.html              # Editorial layout: header, hero, categories, collection
 styles.css              # Design system: meadow/forest/lime/cream tokens, motif bands, cards, drawers, themes
 js/
   main.js               # Bootstrap: dom refs, theme, UI wiring, scroll fx, catalogue load
-  ui.js                 # All event wiring: search, filters, cart, drawers, checkout, toasts
+  ui.js                 # All event wiring: search, filters, cart, drawers, checkout bridge, share, toasts
+  config.js             # STORE: brand, email, Amazon.in/Flipkart search bases; marketplaceUrls(product) helper
   scrollFx.js           # Reveal-on-scroll + back-to-top (rAF-throttled)
   store.js              # Observable state: catalogue, filters, wishlist, CART (persisted), drawers
   data.js               # Catalogue fetch layer
@@ -97,7 +101,7 @@ npx wrangler deploy           # production (required for live-site changes!)
 ## Roadmap
 
 - Swap Commons photography for your own product shots (same `image` field; gradient art stays as fallback)
-- Real checkout (Stripe payment links per product would slot into `checkoutBtn`)
+- Real checkout (replace the marketplace-search bridge with direct listing URLs per product — or Stripe links when ready)
 - Size/color option selectors per product
 - CMS-backed catalogue for non-technical updates
 - Unit tests for `store.js` selectors + CI deploy
